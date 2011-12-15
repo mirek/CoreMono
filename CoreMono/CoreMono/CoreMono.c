@@ -235,7 +235,7 @@ CFArrayRef CMCreateArrayWithMonoInlineBooleanArrayObject(CFAllocatorRef allocato
     return array;
 }
 
-CFArrayRef CMCreateArrayWithMonoInlineArrayObject(CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size) {
+CFArrayRef CMCreateArrayWithMonoInlineNumberArrayObject(CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size) {
     CFArrayRef array = NULL;
     if (monoObject) {
         uintptr_t n = mono_array_length((MonoArray *) monoObject);
@@ -259,29 +259,29 @@ CFArrayRef CMCreateArrayWithMonoInlineArrayObject(CFAllocatorRef allocator, Mono
 }
 
 CFArrayRef CMCreateArrayWithMonoInlineInt32ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt32Type, sizeof(int32_t));
+    return CMCreateArrayWithMonoInlineNumberArrayObject(allocator, monoObject, kCFNumberSInt32Type, sizeof(int32_t));
 }
 
 CFArrayRef CMCreateArrayWithMonoInlineInt64ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt64Type, sizeof(int64_t));
+    return CMCreateArrayWithMonoInlineNumberArrayObject(allocator, monoObject, kCFNumberSInt64Type, sizeof(int64_t));
 }
 
 // TODO: Unsigned
 CFArrayRef CMCreateArrayWithMonoInlineUInt32ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt32Type, sizeof(int32_t));
+    return CMCreateArrayWithMonoInlineNumberArrayObject(allocator, monoObject, kCFNumberSInt32Type, sizeof(int32_t));
 }
 
 // TODO: Unsigned
 CFArrayRef CMCreateArrayWithMonoInlineUInt64ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt64Type, sizeof(int64_t));
+    return CMCreateArrayWithMonoInlineNumberArrayObject(allocator, monoObject, kCFNumberSInt64Type, sizeof(int64_t));
 }
 
 CFArrayRef CMCreateArrayWithMonoInlineDoubleArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberDoubleType, sizeof(double));
+    return CMCreateArrayWithMonoInlineNumberArrayObject(allocator, monoObject, kCFNumberDoubleType, sizeof(double));
 }
 
 CFArrayRef CMCreateArrayWithMonoInlineSingleArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberFloatType, sizeof(float));
+    return CMCreateArrayWithMonoInlineNumberArrayObject(allocator, monoObject, kCFNumberFloatType, sizeof(float));
 }
 
 CFArrayRef CMCreateArrayWithMonoInlineStringArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
@@ -307,7 +307,92 @@ CFArrayRef CMCreateArrayWithMonoInlineStringArrayObject(CFAllocatorRef allocator
     return array;
 }
 
+CFArrayRef CMCreateArrayWithMonoInlineArrayObject(CFAllocatorRef allocator, MonoArray *monoArray) {
+    CFArrayRef array = NULL;
+    if (monoArray) {
+        uintptr_t n = mono_array_length(monoArray);
+        if (n > 0) {
+            CFTypeRef *values = CFAllocatorAllocate(allocator, sizeof(CFTypeRef) * n, 0);
+            if (values) {
+                for (uintptr_t i = 0; i < n; i++) {
+                    values[i] = CMNullify(CMCreateObjectWithMonoObject(allocator, mono_array_get(monoArray, MonoObject *, i)));
+                }
+                array = CFArrayCreate(allocator, values, n, &kCFTypeArrayCallBacks);
+                for (uintptr_t i = 0; i < n; i++) {
+                    CFRelease(values[i]);
+                }
+                CFAllocatorDeallocate(allocator, values);
+            }
+        } else {
+            array = CFArrayCreate(allocator, NULL, 0, &kCFTypeArrayCallBacks);
+        }
+    }
+    return array;
+}
+
+CFArrayRef CMCreateArrayWithMonoArrayListObject(CFAllocatorRef allocator, MonoObject *monoObject) {
+    CFArrayRef array = NULL;
+    if (monoObject) {
+        MonoClass *monoClass = mono_object_get_class(monoObject);
+        int n = * (int *) mono_object_unbox(mono_property_get_value(mono_class_get_property_from_name(monoClass, "Count"), monoObject, NULL, NULL));
+        if (n > 0) {
+            MonoArray *monoArray = mono_array_new(mono_domain_get(), mono_get_object_class(), n);
+            if (monoArray) {
+                
+                int zero = 0;
+                void *params[2] = { monoArray, &zero };
+                
+                // TODO: Check for exceptions
+                (void) mono_runtime_invoke(mono_class_get_method_from_name(monoClass, "CopyTo", 2), monoObject, params, NULL);
+                array = CMCreateArrayWithMonoInlineArrayObject(allocator, monoArray);
+            }
+        } else {
+            array = CFArrayCreate(allocator, NULL, 0, &kCFTypeArrayCallBacks);
+        }
+    }
+    return array;
+}
+
 #define IS_CLASS(klass, namespace, name) (monoClass ? ( strcmp(mono_class_get_namespace(klass), namespace) == 0 && strcmp(mono_class_get_name(klass), name) == 0 ) : 0)
+
+// Char
+// Guid
+// IntPtr
+// Nullable<T>
+// SByte
+// TimeSpan
+// UIntPtr
+// Void
+
+// System.Collections
+//BitArray Class
+//Hashtable Class
+//ICollection Interface
+//IDictionary Interface
+//IEnumerable Interface
+//IList Interface
+//Queue Class
+//SortedList Class
+//Stack Class
+
+// System.Collections.Generic
+//Dictionary<TKey, TValue>
+//HashSet<T>
+//LinkedList<T>
+//LinkedListNode<T>
+//List<T>
+//Queue<T>
+//Stack<T>
+
+// interfaces:
+//ICollection<T>	Defines methods to manipulate generic collections.
+//IComparer<T>	Defines a method that a type implements to compare two objects.
+//IDictionary<TKey, TValue>	Represents a generic collection of key/value pairs.
+//IEnumerable<T>	Exposes the enumerator, which supports a simple iteration over a collection of a specified type.
+//IEnumerator<T>	Supports a simple iteration over a generic collection.
+//IEqualityComparer<T>	Defines methods to support the comparison of objects for equality.
+//IList<T>	Represents a collection of objects that can be individually accessed by index.
+//ISet<T> Provides the base interface for the abstraction of sets.
 
 CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     static MonoClass *kCMMonoClassSystemCollectionsIDictionary = NULL;
@@ -344,6 +429,8 @@ CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *mon
         else if (IS_CLASS(monoClass, "System", "String"   )) result = CMCreateStringWithMonoStringObject            (allocator, monoObject);
         
         else if (IS_CLASS(monoClass, "System", "DateTime" )) result = CMCreateDateWithMonoDateTimeObject            (allocator, monoObject);
+        
+        else if (IS_CLASS(monoClass, "System.Collections", "ArrayList" )) result = CMCreateArrayWithMonoArrayListObject (allocator, monoObject);
 
         else if (mono_class_is_subclass_of(monoClass, kCMMonoClassSystemCollectionsIDictionary, 1)) result = CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(allocator, monoObject);
 
@@ -547,3 +634,14 @@ MonoObject *CMCreateMonoObjectWithObject(CFAllocatorRef allocator, CFTypeRef obj
 }
 
 
+#pragma Mono stuff
+
+MonoObject *CMMonoObjectWithObject(CFTypeRef object) {
+    MonoObject *monoObject = NULL;
+    if (object) {
+        if (CFGetTypeID(object) == CFDictionaryGetTypeID()) {
+            monoObject = mono_object_new(mono_domain_get(), mono_class_from_name(mono_assembly_get_image(mono_assembly_get_main()), "System.Collections.Generic", "Dictionary"));
+        }
+    }
+    return monoObject;
+}

@@ -23,14 +23,17 @@ int main (int argc, const char *argv[]) {
 //                CFTypeRef result = CMImageCreateObjectByInvokingMethodWithName(CMAssemblyGetImage(assembly), CFSTR("test.test1:ReturnInt32WithInt32"), TRUE, &i);
 //                CFShow(result);
 
-                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:GetDictionary"), TRUE);
+                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:PrintDictionary"), TRUE);
                 if (methodDesc) {
                     
                     MonoMethod *monoMethod = CMImageGetMonoMethodWithMethodDesc(CMAssemblyGetImage(assembly), methodDesc);
                     if (monoMethod) {
 //                        int32_t i = 2011;
-//                        void *params[1] = { &i };
-                        MonoObject *monoObject = mono_runtime_invoke(monoMethod, NULL, NULL, NULL);
+                        
+                        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys: @"foo", @"bar", nil];
+
+                        void *params[1] = { CMMonoObjectWithObject(dictionary) };
+                        MonoObject *monoObject = mono_runtime_invoke(monoMethod, NULL, params, NULL);
                         CFTypeRef object = CMCreateObjectWithMonoObject(NULL, monoObject);
                         CFShow(object);
                         if (object) {

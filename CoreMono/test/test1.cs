@@ -6,6 +6,16 @@ namespace test {
 
     public class test1 {
         
+        public static void PrintDictionary(Dictionary<string, object> dictionary) {
+            if (dictionary != null) {
+                foreach (KeyValuePair<string, object> pair in dictionary) {
+                    Console.WriteLine(" - {0} : {1}", pair.Key, pair.Value);
+                }
+            } else {
+                Console.WriteLine("<null>");
+            }
+        }
+        
         public static Dictionary<string, object> GetDictionary() {
             return new Dictionary<string, object>() {
                 { "a", 1 },
@@ -25,7 +35,8 @@ namespace test {
                 { "strings", new string[] { "one", "two", "three" } },
                 { "mix 1", new object[] { 1, "two", 3.3, 4.4f, false, true, null } },
                 { "exception", new Exception("foo") },
-                { "bytes", new byte[] { 0, 1, 2, 3, 4, 5 } }
+                { "bytes", new byte[] { 0, 1, 2, 3, 4, 5 } },
+                { "ArrayList", new ArrayList() { 1, "2", 3.3, 4.4f, false, null, true } }
             };
         }
         

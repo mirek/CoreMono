@@ -57,7 +57,11 @@ CFDataRef CMCreateDataWithMonoInlineByteArrayObject(CFAllocatorRef allocator, Mo
 
 CFArrayRef             CMCreateArrayWithMonoInlineBooleanArrayObject (CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFArrayRef CMCreateArrayWithMonoInlineArrayObject        (CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size);
+CFArrayRef CMCreateArrayWithMonoInlineNumberArrayObject        (CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size);
+
+CFArrayRef CMCreateArrayWithMonoInlineArrayObject(CFAllocatorRef allocator, MonoArray *monoArray);
+CFArrayRef CMCreateArrayWithMonoArrayListObject(CFAllocatorRef allocator, MonoObject *monoObject);
+
 
 CFArrayRef CMCreateArrayWithMonoInlineInt32ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
 CFArrayRef CMCreateArrayWithMonoInlineInt64ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
