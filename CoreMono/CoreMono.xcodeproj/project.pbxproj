@@ -14,7 +14,6 @@
 		EB04884F14991C2000FE618E /* CMCreateObject.c in Headers */ = {isa = PBXBuildFile; fileRef = EB04884E14991C2000FE618E /* CMCreateObject.c */; };
 		EB51DB7D149503D300929A4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB7C149503D300929A4A /* Cocoa.framework */; };
 		EB51DB87149503D300929A4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB51DB85149503D300929A4A /* InfoPlist.strings */; };
-		EB51DB8B149503D300929A4A /* CoreMono.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DB8A149503D300929A4A /* CoreMono.m */; };
 		EB51DB93149503D300929A4A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB92149503D300929A4A /* SenTestingKit.framework */; };
 		EB51DB94149503D300929A4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB7C149503D300929A4A /* Cocoa.framework */; };
 		EB51DB97149503D300929A4A /* CoreMono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB79149503D300929A4A /* CoreMono.framework */; };
@@ -102,7 +101,6 @@
 		EB51DB86149503D300929A4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB51DB88149503D300929A4A /* CoreMono-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreMono-Prefix.pch"; sourceTree = "<group>"; };
 		EB51DB89149503D300929A4A /* CoreMono.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMono.h; sourceTree = "<group>"; };
-		EB51DB8A149503D300929A4A /* CoreMono.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreMono.m; sourceTree = "<group>"; };
 		EB51DB91149503D300929A4A /* CoreMonoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreMonoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB51DB92149503D300929A4A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		EB51DB9A149503D300929A4A /* CoreMonoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreMonoTests-Info.plist"; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 				EB51DB89149503D300929A4A /* CoreMono.h */,
 				EB51DBE114965C1200929A4A /* CoreMono.c */,
 				EB04884E14991C2000FE618E /* CMCreateObject.c */,
-				EB51DB8A149503D300929A4A /* CoreMono.m */,
 				EB51DBC114952A1100929A4A /* CMAssembly.h */,
 				EB51DBB9149504FB00929A4A /* CMAssembly.c */,
 				EB51DBBF1495133C00929A4A /* CMDomain.h */,
@@ -416,7 +413,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB51DB8B149503D300929A4A /* CoreMono.m in Sources */,
 				EB51DBBA149504FB00929A4A /* CMAssembly.c in Sources */,
 				EB51DBC414952AD800929A4A /* CMDomain.c in Sources */,
 				EB51DBD01496138A00929A4A /* CMImage.c in Sources */,

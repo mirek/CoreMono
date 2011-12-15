@@ -17,15 +17,6 @@ CFBooleanRef CMCreateBooleanWithMonoBooleanObject(CFAllocatorRef allocator, Mono
     return boolean;
 }
 
-CFNumberRef CMCreateNumberWithMonoIntObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    CFNumberRef number = NULL;
-    if (monoObject) {
-        int value = * (int *) mono_object_unbox(monoObject);
-        number = CFNumberCreate(allocator, kCFNumberIntType, &value);
-    }
-    return number;
-}
-
 CFNumberRef CMCreateNumberWithMonoInt32Object(CFAllocatorRef allocator, MonoObject *monoObject) {
     CFNumberRef number = NULL;
     if (monoObject) {
@@ -39,6 +30,26 @@ CFNumberRef CMCreateNumberWithMonoInt64Object(CFAllocatorRef allocator, MonoObje
     CFNumberRef number = NULL;
     if (monoObject) {
         int64_t value = * (int64_t *) mono_object_unbox(monoObject);
+        number = CFNumberCreate(allocator, kCFNumberSInt64Type, &value);
+    }
+    return number;
+}
+
+// TODO: Doesn't support unsigned actually
+CFNumberRef CMCreateNumberWithMonoUInt32Object(CFAllocatorRef allocator, MonoObject *monoObject) {
+    CFNumberRef number = NULL;
+    if (monoObject) {
+        int32_t value = (int32_t) (* (uint32_t *) mono_object_unbox(monoObject));
+        number = CFNumberCreate(allocator, kCFNumberSInt32Type, &value);
+    }
+    return number;
+}
+
+// TODO: Doesn't support unsigned actually
+CFNumberRef CMCreateNumberWithMonoUInt64Object(CFAllocatorRef allocator, MonoObject *monoObject) {
+    CFNumberRef number = NULL;
+    if (monoObject) {
+        int64_t value = (int64_t) (* (uint64_t *) mono_object_unbox(monoObject));
         number = CFNumberCreate(allocator, kCFNumberSInt64Type, &value);
     }
     return number;
@@ -114,9 +125,8 @@ CFDictionaryRef CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFAllocato
                     memset(values, 0, sizeof(CFTypeRef) * count);
                     
                     for (int i = 0; i < count; i++) {
-                        // TODO: Set to kCFNull if == NULL
-                        if (NULL == (keys[i] = CMCreateObjectWithMonoObject(allocator, mono_array_get(monoKeysArray, MonoObject *, i)))) keys[i] = kCFNull;
-                        if (NULL == (values[i] = CMCreateObjectWithMonoObject(allocator, mono_array_get(monoValuesArray, MonoObject *, i)))) values[i] = kCFNull;
+                        keys[i] = CMNullify(CMCreateObjectWithMonoObject(allocator, mono_array_get(monoKeysArray, MonoObject *, i)));
+                        values[i] = CMNullify(CMCreateObjectWithMonoObject(allocator, mono_array_get(monoValuesArray, MonoObject *, i)));
                     }
                     
                     dictionary = CFDictionaryCreate(allocator, keys, values, count, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
@@ -232,15 +242,21 @@ CFArrayRef CMCreateArrayWithMonoInlineArrayObject(CFAllocatorRef allocator, Mono
     return array;
 }
 
-CFArrayRef CMCreateArrayWithMonoInlineIntArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
-    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberIntType, sizeof(int));
-}
-
 CFArrayRef CMCreateArrayWithMonoInlineInt32ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt32Type, sizeof(int32_t));
 }
 
 CFArrayRef CMCreateArrayWithMonoInlineInt64ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
+    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt64Type, sizeof(int64_t));
+}
+
+// TODO: Unsigned
+CFArrayRef CMCreateArrayWithMonoInlineUInt32ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
+    return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt32Type, sizeof(int32_t));
+}
+
+// TODO: Unsigned
+CFArrayRef CMCreateArrayWithMonoInlineUInt64ArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     return CMCreateArrayWithMonoInlineArrayObject(allocator, monoObject, kCFNumberSInt64Type, sizeof(int64_t));
 }
 
@@ -275,6 +291,8 @@ CFArrayRef CMCreateArrayWithMonoInlineStringArrayObject(CFAllocatorRef allocator
     return array;
 }
 
+#define IS_CLASS(klass, namespace, name) (monoClass ? ( strcmp(mono_class_get_namespace(klass), namespace) == 0 && strcmp(mono_class_get_name(klass), name) == 0 ) : 0)
+
 CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     static MonoClass *kCMMonoClassSystemCollectionsIDictionary = NULL;
     static MonoClass *kCMMonoClassSystemArray = NULL;
@@ -287,59 +305,34 @@ CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *mon
     
     CFTypeRef result = NULL;
     if (monoObject) {
-//        mono_class_is_valuetype(<#MonoClass *klass#>)
         MonoClass *monoClass = mono_object_get_class(monoObject);
-        const char *monoClassName = mono_class_get_name(monoClass);
+        if      (IS_CLASS(monoClass, "System", "Boolean[]" )) result = CMCreateArrayWithMonoInlineBooleanArrayObject (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Int32[]"   )) result = CMCreateArrayWithMonoInlineInt32ArrayObject   (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Int64[]"   )) result = CMCreateArrayWithMonoInlineInt64ArrayObject   (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "UInt32[]"  )) result = CMCreateArrayWithMonoInlineUInt32ArrayObject  (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "UInt64[]"  )) result = CMCreateArrayWithMonoInlineUInt64ArrayObject  (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Single[]"  )) result = CMCreateArrayWithMonoInlineSingleArrayObject  (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Double[]"  )) result = CMCreateArrayWithMonoInlineDoubleArrayObject  (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "String[]"  )) result = CMCreateArrayWithMonoInlineStringArrayObject  (allocator, monoObject);
         
-        if (mono_class_is_subclass_of(monoClass, kCMMonoClassSystemCollectionsIDictionary, 1)) result = CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(allocator, monoObject);
-        
-        else if (strcmp("Boolean[]", monoClassName) == 0) result = CMCreateArrayWithMonoInlineBooleanArrayObject(allocator, monoObject);
-        else if (strcmp("int[]",     monoClassName) == 0) result = CMCreateArrayWithMonoInlineIntArrayObject(allocator, monoObject);
-        else if (strcmp("Int32[]",   monoClassName) == 0) result = CMCreateArrayWithMonoInlineInt32ArrayObject(allocator, monoObject);
-        else if (strcmp("Int64[]",   monoClassName) == 0) result = CMCreateArrayWithMonoInlineInt64ArrayObject(allocator, monoObject);
-        
-        else if (strcmp("Single[]",  monoClassName) == 0) result = CMCreateArrayWithMonoInlineSingleArrayObject(allocator, monoObject);
-        else if (strcmp("Double[]",  monoClassName) == 0) result = CMCreateArrayWithMonoInlineDoubleArrayObject(allocator, monoObject);
-        
-        else if (strcmp("String[]",  monoClassName) == 0) result = CMCreateArrayWithMonoInlineStringArrayObject(allocator, monoObject);
-        
-        else if (strcmp("Boolean",   monoClassName) == 0) result = CMCreateBooleanWithMonoBooleanObject(allocator, monoObject);
-        else if (strcmp("int",       monoClassName) == 0) result = CMCreateNumberWithMonoIntObject(allocator, monoObject);
-        else if (strcmp("Int32",     monoClassName) == 0) result = CMCreateNumberWithMonoInt32Object(allocator, monoObject);
-        else if (strcmp("Int64",     monoClassName) == 0) result = CMCreateNumberWithMonoInt64Object(allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Boolean"  )) result = CMCreateBooleanWithMonoBooleanObject          (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Int32"    )) result = CMCreateNumberWithMonoInt32Object             (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Int64"    )) result = CMCreateNumberWithMonoInt64Object             (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "UInt32"   )) result = CMCreateNumberWithMonoUInt32Object            (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "UInt64"   )) result = CMCreateNumberWithMonoUInt64Object            (allocator, monoObject);
 
-        else if (strcmp("Single",    monoClassName) == 0) result = CMCreateNumberWithMonoSingleObject(allocator, monoObject);
-        else if (strcmp("Double",    monoClassName) == 0) result = CMCreateNumberWithMonoDoubleObject(allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Single"   )) result = CMCreateNumberWithMonoSingleObject            (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Double"   )) result = CMCreateNumberWithMonoDoubleObject            (allocator, monoObject);
 
-        else if (strcmp("String",    monoClassName) == 0) result = CMCreateStringWithMonoStringObject(allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "String"   )) result = CMCreateStringWithMonoStringObject            (allocator, monoObject);
         
-        else if (strcmp("DateTime",  monoClassName) == 0) result = CMCreateDateWithMonoDateTimeObject(allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "DateTime" )) result = CMCreateDateWithMonoDateTimeObject            (allocator, monoObject);
+
+        else if (mono_class_is_subclass_of(monoClass, kCMMonoClassSystemCollectionsIDictionary, 1)) result = CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(allocator, monoObject);
+
+        else if (mono_class_is_subclass_of(monoClass, kCMMonoClassSystemArray, 0)) result = CMCreateArrayWithMonoSubclassOfArrayObject(allocator, monoObject);
         
-        else if (mono_class_is_subclass_of(monoClass, kCMMonoClassSystemArray, 0))
-            result = CMCreateArrayWithMonoSubclassOfArrayObject(allocator, monoObject);
-        else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
-            
-        } else if (strcmp("", monoClassName) == 0) {
+        else if (IS_CLASS(monoClass, "System", "")) {
             
         } else {
             result = CMCreateDictionaryWithPropertiesOfMonoObject(allocator, monoObject);

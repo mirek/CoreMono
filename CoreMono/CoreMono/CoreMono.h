@@ -47,28 +47,30 @@
 #define CM_BOX_UINT8(x)   mono_value_box(mono_domain_get(), mono_get_byte_class(),    &x)
 #define CM_BOX_BOOLEAN(x) mono_value_box(mono_domain_get(), mono_get_boolean_class(), &x)
 
-CFTypeRef CMNullify(CFTypeRef value);
+CFTypeRef              CMNullify(CFTypeRef value);
 
-CFDictionaryRef CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFAllocatorRef allocator, MonoObject *monoObject);
+CFDictionaryRef        CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFAllocatorRef allocator, MonoObject *monoObject);
 CFMutableDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject(CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef CMCreateArrayWithMonoSubclassOfArrayObject(CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef             CMCreateArrayWithMonoSubclassOfArrayObject(CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFArrayRef CMCreateArrayWithMonoInlineBooleanArrayObject (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef             CMCreateArrayWithMonoInlineBooleanArrayObject (CFAllocatorRef allocator, MonoObject *monoObject);
 
 CFArrayRef CMCreateArrayWithMonoInlineArrayObject        (CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size);
 
-CFArrayRef CMCreateArrayWithMonoInlineIntArrayObject     (CFAllocatorRef allocator, MonoObject *monoObject);
 CFArrayRef CMCreateArrayWithMonoInlineInt32ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
 CFArrayRef CMCreateArrayWithMonoInlineInt64ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef CMCreateArrayWithMonoInlineUInt32ArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef CMCreateArrayWithMonoInlineUInt64ArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
 CFArrayRef CMCreateArrayWithMonoInlineSingleArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
 CFArrayRef CMCreateArrayWithMonoInlineDoubleArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
 
 CFArrayRef CMCreateArrayWithMonoInlineStringArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
 
 CFBooleanRef CMCreateBooleanWithMonoBooleanObject (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoIntObject      (CFAllocatorRef allocator, MonoObject *monoObject);
 CFNumberRef  CMCreateNumberWithMonoInt32Object    (CFAllocatorRef allocator, MonoObject *monoObject);
 CFNumberRef  CMCreateNumberWithMonoInt64Object    (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef  CMCreateNumberWithMonoUInt32Object   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef  CMCreateNumberWithMonoUInt64Object   (CFAllocatorRef allocator, MonoObject *monoObject);
 CFNumberRef  CMCreateNumberWithMonoSingleObject   (CFAllocatorRef allocator, MonoObject *monoObject);
 CFNumberRef  CMCreateNumberWithMonoDoubleObject   (CFAllocatorRef allocator, MonoObject *monoObject);
 CFDateRef    CMCreateDateWithMonoDateTimeObject   (CFAllocatorRef allocator, MonoObject *monoObject);

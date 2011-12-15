@@ -12,6 +12,7 @@ namespace test {
                 { "b", -2 },
                 { "c", -3.0 },
                 { "d", 5.5 },
+                { "int", (int) 3 },
                 { "e", null },
                 { "f", "7" },
                 { "g", new DateTime() },
