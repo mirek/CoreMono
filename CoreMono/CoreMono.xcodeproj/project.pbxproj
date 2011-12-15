@@ -1,0 +1,646 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB048849149904A500FE618E /* CMClass.h in Headers */ = {isa = PBXBuildFile; fileRef = EB048848149904A500FE618E /* CMClass.h */; };
+		EB04884B1499055100FE618E /* CMClass.c in Sources */ = {isa = PBXBuildFile; fileRef = EB04884A1499055100FE618E /* CMClass.c */; };
+		EB04884C1499055100FE618E /* CMClass.c in Sources */ = {isa = PBXBuildFile; fileRef = EB04884A1499055100FE618E /* CMClass.c */; };
+		EB04884D1499055100FE618E /* CMClass.c in Sources */ = {isa = PBXBuildFile; fileRef = EB04884A1499055100FE618E /* CMClass.c */; };
+		EB04884F14991C2000FE618E /* CMCreateObject.c in Headers */ = {isa = PBXBuildFile; fileRef = EB04884E14991C2000FE618E /* CMCreateObject.c */; };
+		EB51DB7D149503D300929A4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB7C149503D300929A4A /* Cocoa.framework */; };
+		EB51DB87149503D300929A4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB51DB85149503D300929A4A /* InfoPlist.strings */; };
+		EB51DB8B149503D300929A4A /* CoreMono.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DB8A149503D300929A4A /* CoreMono.m */; };
+		EB51DB93149503D300929A4A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB92149503D300929A4A /* SenTestingKit.framework */; };
+		EB51DB94149503D300929A4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB7C149503D300929A4A /* Cocoa.framework */; };
+		EB51DB97149503D300929A4A /* CoreMono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB79149503D300929A4A /* CoreMono.framework */; };
+		EB51DB9D149503D300929A4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB51DB9B149503D300929A4A /* InfoPlist.strings */; };
+		EB51DBA0149503D300929A4A /* CoreMonoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DB9F149503D300929A4A /* CoreMonoTests.m */; };
+		EB51DBB0149503ED00929A4A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DBAF149503ED00929A4A /* CoreFoundation.framework */; };
+		EB51DBB3149503ED00929A4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBB2149503ED00929A4A /* main.m */; };
+		EB51DBB5149503ED00929A4A /* test.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB51DBB4149503ED00929A4A /* test.1 */; };
+		EB51DBBA149504FB00929A4A /* CMAssembly.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBB9149504FB00929A4A /* CMAssembly.c */; };
+		EB51DBBB149504FB00929A4A /* CMAssembly.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBB9149504FB00929A4A /* CMAssembly.c */; };
+		EB51DBBC149504FB00929A4A /* CMAssembly.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBB9149504FB00929A4A /* CMAssembly.c */; };
+		EB51DBBE149511A700929A4A /* Mono.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DBBD149511A700929A4A /* Mono.framework */; };
+		EB51DBC01495133C00929A4A /* CMDomain.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBBF1495133C00929A4A /* CMDomain.h */; };
+		EB51DBC214952A1200929A4A /* CMAssembly.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBC114952A1100929A4A /* CMAssembly.h */; };
+		EB51DBC414952AD800929A4A /* CMDomain.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBC314952AD800929A4A /* CMDomain.c */; };
+		EB51DBC514952AD800929A4A /* CMDomain.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBC314952AD800929A4A /* CMDomain.c */; };
+		EB51DBC614952AD800929A4A /* CMDomain.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBC314952AD800929A4A /* CMDomain.c */; };
+		EB51DBC81495426600929A4A /* CMMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBC71495426600929A4A /* CMMethod.h */; };
+		EB51DBCA149546AA00929A4A /* CMImage.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBC9149546AA00929A4A /* CMImage.h */; };
+		EB51DBD01496138A00929A4A /* CMImage.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBCF1496138A00929A4A /* CMImage.c */; };
+		EB51DBD11496138A00929A4A /* CMImage.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBCF1496138A00929A4A /* CMImage.c */; };
+		EB51DBD21496138A00929A4A /* CMImage.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBCF1496138A00929A4A /* CMImage.c */; };
+		EB51DBD4149639B400929A4A /* CMTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBD3149639B400929A4A /* CMTypes.h */; };
+		EB51DBD61496523800929A4A /* CMAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBD51496523800929A4A /* CMAssembly.m */; };
+		EB51DBD71496523800929A4A /* CMAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBD51496523800929A4A /* CMAssembly.m */; };
+		EB51DBD81496523800929A4A /* CMAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBD51496523800929A4A /* CMAssembly.m */; };
+		EB51DBE01496571700929A4A /* test1.exe in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB51DBDD149656F100929A4A /* test1.exe */; };
+		EB51DBE214965C1200929A4A /* CoreMono.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE114965C1200929A4A /* CoreMono.c */; };
+		EB51DBE314965C1200929A4A /* CoreMono.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE114965C1200929A4A /* CoreMono.c */; };
+		EB51DBE414965C1200929A4A /* CoreMono.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE114965C1200929A4A /* CoreMono.c */; };
+		EB51DBE61496798500929A4A /* CMMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE51496798500929A4A /* CMMethod.c */; };
+		EB51DBE71496798500929A4A /* CMMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE51496798500929A4A /* CMMethod.c */; };
+		EB51DBE81496798500929A4A /* CMMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE51496798500929A4A /* CMMethod.c */; };
+		EB51DBEA14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
+		EB51DBEB14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
+		EB51DBEC14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
+		EB51DBEE14967A7400929A4A /* CMMethodDesc.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBED14967A7400929A4A /* CMMethodDesc.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB51DB95149503D300929A4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB51DB6F149503D200929A4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB51DB78149503D300929A4A;
+			remoteInfo = CoreMono;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB51DBAB149503ED00929A4A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				EB51DBB5149503ED00929A4A /* test.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		EB51DBDF1496570E00929A4A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				EB51DBE01496571700929A4A /* test1.exe in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EB0488471498FFFB00FE618E /* test1.cs */ = {isa = PBXFileReference; lastKnownFileType = text; path = test1.cs; sourceTree = "<group>"; };
+		EB048848149904A500FE618E /* CMClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMClass.h; sourceTree = "<group>"; };
+		EB04884A1499055100FE618E /* CMClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMClass.c; sourceTree = "<group>"; };
+		EB04884E14991C2000FE618E /* CMCreateObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMCreateObject.c; sourceTree = "<group>"; };
+		EB51DB79149503D300929A4A /* CoreMono.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreMono.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB51DB7C149503D300929A4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		EB51DB7F149503D300929A4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		EB51DB80149503D300929A4A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EB51DB81149503D300929A4A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EB51DB84149503D300929A4A /* CoreMono-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreMono-Info.plist"; sourceTree = "<group>"; };
+		EB51DB86149503D300929A4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB51DB88149503D300929A4A /* CoreMono-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreMono-Prefix.pch"; sourceTree = "<group>"; };
+		EB51DB89149503D300929A4A /* CoreMono.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMono.h; sourceTree = "<group>"; };
+		EB51DB8A149503D300929A4A /* CoreMono.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreMono.m; sourceTree = "<group>"; };
+		EB51DB91149503D300929A4A /* CoreMonoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreMonoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB51DB92149503D300929A4A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		EB51DB9A149503D300929A4A /* CoreMonoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreMonoTests-Info.plist"; sourceTree = "<group>"; };
+		EB51DB9C149503D300929A4A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB51DB9E149503D300929A4A /* CoreMonoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMonoTests.h; sourceTree = "<group>"; };
+		EB51DB9F149503D300929A4A /* CoreMonoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreMonoTests.m; sourceTree = "<group>"; };
+		EB51DBAD149503ED00929A4A /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB51DBAF149503ED00929A4A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		EB51DBB2149503ED00929A4A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EB51DBB4149503ED00929A4A /* test.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = test.1; sourceTree = "<group>"; };
+		EB51DBB9149504FB00929A4A /* CMAssembly.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMAssembly.c; sourceTree = "<group>"; };
+		EB51DBBD149511A700929A4A /* Mono.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mono.framework; path = Library/Frameworks/Mono.framework; sourceTree = SDKROOT; };
+		EB51DBBF1495133C00929A4A /* CMDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDomain.h; sourceTree = "<group>"; };
+		EB51DBC114952A1100929A4A /* CMAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMAssembly.h; sourceTree = "<group>"; };
+		EB51DBC314952AD800929A4A /* CMDomain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMDomain.c; sourceTree = "<group>"; };
+		EB51DBC71495426600929A4A /* CMMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMethod.h; sourceTree = "<group>"; };
+		EB51DBC9149546AA00929A4A /* CMImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMImage.h; sourceTree = "<group>"; };
+		EB51DBCF1496138A00929A4A /* CMImage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMImage.c; sourceTree = "<group>"; };
+		EB51DBD3149639B400929A4A /* CMTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTypes.h; sourceTree = "<group>"; };
+		EB51DBD51496523800929A4A /* CMAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAssembly.m; sourceTree = "<group>"; };
+		EB51DBDD149656F100929A4A /* test1.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.exe; sourceTree = "<group>"; };
+		EB51DBE114965C1200929A4A /* CoreMono.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMono.c; sourceTree = "<group>"; };
+		EB51DBE51496798500929A4A /* CMMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMMethod.c; sourceTree = "<group>"; };
+		EB51DBE914967A6300929A4A /* CMMethodDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMMethodDesc.c; sourceTree = "<group>"; };
+		EB51DBED14967A7400929A4A /* CMMethodDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMethodDesc.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB51DB75149503D300929A4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DB7D149503D300929A4A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB51DB8D149503D300929A4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DB93149503D300929A4A /* SenTestingKit.framework in Frameworks */,
+				EB51DB94149503D300929A4A /* Cocoa.framework in Frameworks */,
+				EB51DB97149503D300929A4A /* CoreMono.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB51DBAA149503ED00929A4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DBB0149503ED00929A4A /* CoreFoundation.framework in Frameworks */,
+				EB51DBBE149511A700929A4A /* Mono.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB51DB6D149503D200929A4A = {
+			isa = PBXGroup;
+			children = (
+				EB51DB82149503D300929A4A /* CoreMono */,
+				EB51DB98149503D300929A4A /* CoreMonoTests */,
+				EB51DBB1149503ED00929A4A /* test */,
+				EB51DB7B149503D300929A4A /* Frameworks */,
+				EB51DB7A149503D300929A4A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB51DB7A149503D300929A4A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DB79149503D300929A4A /* CoreMono.framework */,
+				EB51DB91149503D300929A4A /* CoreMonoTests.octest */,
+				EB51DBAD149503ED00929A4A /* test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB51DB7B149503D300929A4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DBBD149511A700929A4A /* Mono.framework */,
+				EB51DB7C149503D300929A4A /* Cocoa.framework */,
+				EB51DB92149503D300929A4A /* SenTestingKit.framework */,
+				EB51DBAF149503ED00929A4A /* CoreFoundation.framework */,
+				EB51DB7E149503D300929A4A /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB51DB7E149503D300929A4A /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DB7F149503D300929A4A /* AppKit.framework */,
+				EB51DB80149503D300929A4A /* CoreData.framework */,
+				EB51DB81149503D300929A4A /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		EB51DB82149503D300929A4A /* CoreMono */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DB83149503D300929A4A /* Supporting Files */,
+				EB51DB89149503D300929A4A /* CoreMono.h */,
+				EB51DBE114965C1200929A4A /* CoreMono.c */,
+				EB04884E14991C2000FE618E /* CMCreateObject.c */,
+				EB51DB8A149503D300929A4A /* CoreMono.m */,
+				EB51DBC114952A1100929A4A /* CMAssembly.h */,
+				EB51DBB9149504FB00929A4A /* CMAssembly.c */,
+				EB51DBD51496523800929A4A /* CMAssembly.m */,
+				EB51DBBF1495133C00929A4A /* CMDomain.h */,
+				EB51DBC314952AD800929A4A /* CMDomain.c */,
+				EB51DBC71495426600929A4A /* CMMethod.h */,
+				EB51DBE51496798500929A4A /* CMMethod.c */,
+				EB51DBED14967A7400929A4A /* CMMethodDesc.h */,
+				EB51DBE914967A6300929A4A /* CMMethodDesc.c */,
+				EB51DBC9149546AA00929A4A /* CMImage.h */,
+				EB51DBCF1496138A00929A4A /* CMImage.c */,
+				EB51DBD3149639B400929A4A /* CMTypes.h */,
+				EB048848149904A500FE618E /* CMClass.h */,
+				EB04884A1499055100FE618E /* CMClass.c */,
+			);
+			path = CoreMono;
+			sourceTree = "<group>";
+		};
+		EB51DB83149503D300929A4A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DB84149503D300929A4A /* CoreMono-Info.plist */,
+				EB51DB85149503D300929A4A /* InfoPlist.strings */,
+				EB51DB88149503D300929A4A /* CoreMono-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB51DB98149503D300929A4A /* CoreMonoTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DB9E149503D300929A4A /* CoreMonoTests.h */,
+				EB51DB9F149503D300929A4A /* CoreMonoTests.m */,
+				EB51DB99149503D300929A4A /* Supporting Files */,
+			);
+			path = CoreMonoTests;
+			sourceTree = "<group>";
+		};
+		EB51DB99149503D300929A4A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB51DB9A149503D300929A4A /* CoreMonoTests-Info.plist */,
+				EB51DB9B149503D300929A4A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB51DBB1149503ED00929A4A /* test */ = {
+			isa = PBXGroup;
+			children = (
+				EB0488471498FFFB00FE618E /* test1.cs */,
+				EB51DBDD149656F100929A4A /* test1.exe */,
+				EB51DBB2149503ED00929A4A /* main.m */,
+				EB51DBB4149503ED00929A4A /* test.1 */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		EB51DB76149503D300929A4A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DBC01495133C00929A4A /* CMDomain.h in Headers */,
+				EB51DBC214952A1200929A4A /* CMAssembly.h in Headers */,
+				EB51DBC81495426600929A4A /* CMMethod.h in Headers */,
+				EB51DBCA149546AA00929A4A /* CMImage.h in Headers */,
+				EB51DBD4149639B400929A4A /* CMTypes.h in Headers */,
+				EB51DBEE14967A7400929A4A /* CMMethodDesc.h in Headers */,
+				EB048849149904A500FE618E /* CMClass.h in Headers */,
+				EB04884F14991C2000FE618E /* CMCreateObject.c in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		EB51DB78149503D300929A4A /* CoreMono */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB51DBA3149503D300929A4A /* Build configuration list for PBXNativeTarget "CoreMono" */;
+			buildPhases = (
+				EB51DB74149503D300929A4A /* Sources */,
+				EB51DB75149503D300929A4A /* Frameworks */,
+				EB51DB76149503D300929A4A /* Headers */,
+				EB51DB77149503D300929A4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreMono;
+			productName = CoreMono;
+			productReference = EB51DB79149503D300929A4A /* CoreMono.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EB51DB90149503D300929A4A /* CoreMonoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB51DBA6149503D300929A4A /* Build configuration list for PBXNativeTarget "CoreMonoTests" */;
+			buildPhases = (
+				EB51DB8C149503D300929A4A /* Sources */,
+				EB51DB8D149503D300929A4A /* Frameworks */,
+				EB51DB8E149503D300929A4A /* Resources */,
+				EB51DB8F149503D300929A4A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB51DB96149503D300929A4A /* PBXTargetDependency */,
+			);
+			name = CoreMonoTests;
+			productName = CoreMonoTests;
+			productReference = EB51DB91149503D300929A4A /* CoreMonoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		EB51DBAC149503ED00929A4A /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB51DBB6149503ED00929A4A /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				EB51DBA9149503ED00929A4A /* Sources */,
+				EB51DBAA149503ED00929A4A /* Frameworks */,
+				EB51DBAB149503ED00929A4A /* CopyFiles */,
+				EB51DBDF1496570E00929A4A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = test;
+			productReference = EB51DBAD149503ED00929A4A /* test */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB51DB6F149503D200929A4A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = EB51DB72149503D200929A4A /* Build configuration list for PBXProject "CoreMono" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EB51DB6D149503D200929A4A;
+			productRefGroup = EB51DB7A149503D300929A4A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB51DB78149503D300929A4A /* CoreMono */,
+				EB51DB90149503D300929A4A /* CoreMonoTests */,
+				EB51DBAC149503ED00929A4A /* test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB51DB77149503D300929A4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DB87149503D300929A4A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB51DB8E149503D300929A4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DB9D149503D300929A4A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EB51DB8F149503D300929A4A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB51DB74149503D300929A4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DB8B149503D300929A4A /* CoreMono.m in Sources */,
+				EB51DBBA149504FB00929A4A /* CMAssembly.c in Sources */,
+				EB51DBC414952AD800929A4A /* CMDomain.c in Sources */,
+				EB51DBD01496138A00929A4A /* CMImage.c in Sources */,
+				EB51DBD61496523800929A4A /* CMAssembly.m in Sources */,
+				EB51DBE214965C1200929A4A /* CoreMono.c in Sources */,
+				EB51DBE61496798500929A4A /* CMMethod.c in Sources */,
+				EB51DBEA14967A6300929A4A /* CMMethodDesc.c in Sources */,
+				EB04884B1499055100FE618E /* CMClass.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB51DB8C149503D300929A4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DBA0149503D300929A4A /* CoreMonoTests.m in Sources */,
+				EB51DBBB149504FB00929A4A /* CMAssembly.c in Sources */,
+				EB51DBC514952AD800929A4A /* CMDomain.c in Sources */,
+				EB51DBD11496138A00929A4A /* CMImage.c in Sources */,
+				EB51DBD71496523800929A4A /* CMAssembly.m in Sources */,
+				EB51DBE314965C1200929A4A /* CoreMono.c in Sources */,
+				EB51DBE71496798500929A4A /* CMMethod.c in Sources */,
+				EB51DBEB14967A6300929A4A /* CMMethodDesc.c in Sources */,
+				EB04884C1499055100FE618E /* CMClass.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB51DBA9149503ED00929A4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB51DBB3149503ED00929A4A /* main.m in Sources */,
+				EB51DBBC149504FB00929A4A /* CMAssembly.c in Sources */,
+				EB51DBC614952AD800929A4A /* CMDomain.c in Sources */,
+				EB51DBD21496138A00929A4A /* CMImage.c in Sources */,
+				EB51DBD81496523800929A4A /* CMAssembly.m in Sources */,
+				EB51DBE414965C1200929A4A /* CoreMono.c in Sources */,
+				EB51DBE81496798500929A4A /* CMMethod.c in Sources */,
+				EB51DBEC14967A6300929A4A /* CMMethodDesc.c in Sources */,
+				EB04884D1499055100FE618E /* CMClass.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB51DB96149503D300929A4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB51DB78149503D300929A4A /* CoreMono */;
+			targetProxy = EB51DB95149503D300929A4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EB51DB85149503D300929A4A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB51DB86149503D300929A4A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EB51DB9B149503D300929A4A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB51DB9C149503D300929A4A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EB51DBA1149503D300929A4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/Library/Frameworks/Mono.framework/Versions/Current/include/mono-2.0";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EB51DBA2149503D300929A4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/Library/Frameworks/Mono.framework/Versions/Current/include/mono-2.0";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EB51DBA4149503D300929A4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreMono/CoreMono-Prefix.pch";
+				INFOPLIST_FILE = "CoreMono/CoreMono-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Library/Frameworks/Mono.framework/Versions/2.10.6/lib/mono-2.0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		EB51DBA5149503D300929A4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreMono/CoreMono-Prefix.pch";
+				INFOPLIST_FILE = "CoreMono/CoreMono-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Library/Frameworks/Mono.framework/Versions/2.10.6/lib/mono-2.0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		EB51DBA7149503D300929A4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreMono/CoreMono-Prefix.pch";
+				INFOPLIST_FILE = "CoreMonoTests/CoreMonoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		EB51DBA8149503D300929A4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreMono/CoreMono-Prefix.pch";
+				INFOPLIST_FILE = "CoreMonoTests/CoreMonoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		EB51DBB7149503ED00929A4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EB51DBB8149503ED00929A4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB51DB72149503D200929A4A /* Build configuration list for PBXProject "CoreMono" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB51DBA1149503D300929A4A /* Debug */,
+				EB51DBA2149503D300929A4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB51DBA3149503D300929A4A /* Build configuration list for PBXNativeTarget "CoreMono" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB51DBA4149503D300929A4A /* Debug */,
+				EB51DBA5149503D300929A4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB51DBA6149503D300929A4A /* Build configuration list for PBXNativeTarget "CoreMonoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB51DBA7149503D300929A4A /* Debug */,
+				EB51DBA8149503D300929A4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB51DBB6149503ED00929A4A /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB51DBB7149503ED00929A4A /* Debug */,
+				EB51DBB8149503ED00929A4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB51DB6F149503D200929A4A /* Project object */;
+}
