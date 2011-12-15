@@ -18,22 +18,44 @@ CMDomainRef __CMDomainCreate(CFAllocatorRef allocator) {
     return domain;
 }
 
-CMDomainRef CMDomainCreateWithPath(CFAllocatorRef allocator, CFStringRef path) {
+CMDomainRef CMDomainCreateWithMonoDomain(CFAllocatorRef allocator, MonoDomain *monoDomain) {
     CMDomainRef domain = __CMDomainCreate(allocator);
     if (domain) {
-        domain->path = CFRetain(path);
-        IF_UTF8(domain->allocator, path, pathUtf8, {
-            if (NULL == (domain->monoDomain = mono_jit_init(pathUtf8))) {
-                // TODO: Error
-            }
-        });
+        // TODO: path
+        domain->monoDomain = monoDomain;
     }
     return domain;
 }
 
-CMDomainRef CMDomainCreateWithNameAndVersion(CFAllocatorRef allocator, CFStringRef name, CFStringRef version) {
-    return NULL;
+CMAssemblyRef CMDomainCreateAssemblyByOpeningPath(CMDomainRef domain, CFStringRef path) {
+    CMAssemblyRef assembly = NULL;
+    if (domain) {
+        if (path) {
+            IF_UTF8(domain->allocator, path, utf8, {
+                assembly = CMAssemblyCreateWithMonoAssembly(domain->allocator, mono_domain_assembly_open(domain->monoDomain, utf8));
+            });
+        }
+    }
+    return assembly;
 }
+
+//
+//CMDomainRef CMDomainCreateWithPath(CFAllocatorRef allocator, CFStringRef path) {
+//    CMDomainRef domain = __CMDomainCreate(allocator);
+//    if (domain) {
+//        domain->path = CFRetain(path);
+//        IF_UTF8(domain->allocator, path, pathUtf8, {
+//            if (NULL == (domain->monoDomain = mono_jit_init(pathUtf8))) {
+//                // TODO: Error
+//            }
+//        });
+//    }
+//    return domain;
+//}
+
+//CMDomainRef CMDomainCreateWithNameAndVersion(CFAllocatorRef allocator, CFStringRef name, CFStringRef version) {
+//    return NULL;
+//}
 
 CMDomainRef CMDomainRetain(CMDomainRef domain) {
     if (domain) {

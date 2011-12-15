@@ -8,16 +8,16 @@
 
 #import "CoreMono.h"
 
-@implementation CoreMono
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
-@end
+//@implementation CoreMono
+//
+//- (id)init
+//{
+//    self = [super init];
+//    if (self) {
+//        // Initialization code here.
+//    }
+//    
+//    return self;
+//}
+//
+//@end

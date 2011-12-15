@@ -38,9 +38,6 @@
 		EB51DBD11496138A00929A4A /* CMImage.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBCF1496138A00929A4A /* CMImage.c */; };
 		EB51DBD21496138A00929A4A /* CMImage.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBCF1496138A00929A4A /* CMImage.c */; };
 		EB51DBD4149639B400929A4A /* CMTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBD3149639B400929A4A /* CMTypes.h */; };
-		EB51DBD61496523800929A4A /* CMAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBD51496523800929A4A /* CMAssembly.m */; };
-		EB51DBD71496523800929A4A /* CMAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBD51496523800929A4A /* CMAssembly.m */; };
-		EB51DBD81496523800929A4A /* CMAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBD51496523800929A4A /* CMAssembly.m */; };
 		EB51DBE01496571700929A4A /* test1.exe in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB51DBDD149656F100929A4A /* test1.exe */; };
 		EB51DBE214965C1200929A4A /* CoreMono.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE114965C1200929A4A /* CoreMono.c */; };
 		EB51DBE314965C1200929A4A /* CoreMono.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE114965C1200929A4A /* CoreMono.c */; };
@@ -52,6 +49,10 @@
 		EB51DBEB14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
 		EB51DBEC14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
 		EB51DBEE14967A7400929A4A /* CMMethodDesc.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBED14967A7400929A4A /* CMMethodDesc.h */; };
+		ED0BD8CA149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
+		ED0BD8CB149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
+		ED0BD8CC149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
+		ED0BD8CF149A10D1003C1B7F /* CMJIT.h in Headers */ = {isa = PBXBuildFile; fileRef = ED0BD8CE149A10D1003C1B7F /* CMJIT.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,12 +122,13 @@
 		EB51DBC9149546AA00929A4A /* CMImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMImage.h; sourceTree = "<group>"; };
 		EB51DBCF1496138A00929A4A /* CMImage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMImage.c; sourceTree = "<group>"; };
 		EB51DBD3149639B400929A4A /* CMTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTypes.h; sourceTree = "<group>"; };
-		EB51DBD51496523800929A4A /* CMAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAssembly.m; sourceTree = "<group>"; };
 		EB51DBDD149656F100929A4A /* test1.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.exe; sourceTree = "<group>"; };
 		EB51DBE114965C1200929A4A /* CoreMono.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMono.c; sourceTree = "<group>"; };
 		EB51DBE51496798500929A4A /* CMMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMMethod.c; sourceTree = "<group>"; };
 		EB51DBE914967A6300929A4A /* CMMethodDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMMethodDesc.c; sourceTree = "<group>"; };
 		EB51DBED14967A7400929A4A /* CMMethodDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMethodDesc.h; sourceTree = "<group>"; };
+		ED0BD8C9149A1044003C1B7F /* CMJIT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMJIT.c; sourceTree = "<group>"; };
+		ED0BD8CE149A10D1003C1B7F /* CMJIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMJIT.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,7 +215,6 @@
 				EB51DB8A149503D300929A4A /* CoreMono.m */,
 				EB51DBC114952A1100929A4A /* CMAssembly.h */,
 				EB51DBB9149504FB00929A4A /* CMAssembly.c */,
-				EB51DBD51496523800929A4A /* CMAssembly.m */,
 				EB51DBBF1495133C00929A4A /* CMDomain.h */,
 				EB51DBC314952AD800929A4A /* CMDomain.c */,
 				EB51DBC71495426600929A4A /* CMMethod.h */,
@@ -225,6 +226,8 @@
 				EB51DBD3149639B400929A4A /* CMTypes.h */,
 				EB048848149904A500FE618E /* CMClass.h */,
 				EB04884A1499055100FE618E /* CMClass.c */,
+				ED0BD8CE149A10D1003C1B7F /* CMJIT.h */,
+				ED0BD8C9149A1044003C1B7F /* CMJIT.c */,
 			);
 			path = CoreMono;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				EB51DBEE14967A7400929A4A /* CMMethodDesc.h in Headers */,
 				EB048849149904A500FE618E /* CMClass.h in Headers */,
 				EB04884F14991C2000FE618E /* CMCreateObject.c in Headers */,
+				ED0BD8CF149A10D1003C1B7F /* CMJIT.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,11 +420,11 @@
 				EB51DBBA149504FB00929A4A /* CMAssembly.c in Sources */,
 				EB51DBC414952AD800929A4A /* CMDomain.c in Sources */,
 				EB51DBD01496138A00929A4A /* CMImage.c in Sources */,
-				EB51DBD61496523800929A4A /* CMAssembly.m in Sources */,
 				EB51DBE214965C1200929A4A /* CoreMono.c in Sources */,
 				EB51DBE61496798500929A4A /* CMMethod.c in Sources */,
 				EB51DBEA14967A6300929A4A /* CMMethodDesc.c in Sources */,
 				EB04884B1499055100FE618E /* CMClass.c in Sources */,
+				ED0BD8CA149A1044003C1B7F /* CMJIT.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,11 +436,11 @@
 				EB51DBBB149504FB00929A4A /* CMAssembly.c in Sources */,
 				EB51DBC514952AD800929A4A /* CMDomain.c in Sources */,
 				EB51DBD11496138A00929A4A /* CMImage.c in Sources */,
-				EB51DBD71496523800929A4A /* CMAssembly.m in Sources */,
 				EB51DBE314965C1200929A4A /* CoreMono.c in Sources */,
 				EB51DBE71496798500929A4A /* CMMethod.c in Sources */,
 				EB51DBEB14967A6300929A4A /* CMMethodDesc.c in Sources */,
 				EB04884C1499055100FE618E /* CMClass.c in Sources */,
+				ED0BD8CB149A1044003C1B7F /* CMJIT.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,11 +452,11 @@
 				EB51DBBC149504FB00929A4A /* CMAssembly.c in Sources */,
 				EB51DBC614952AD800929A4A /* CMDomain.c in Sources */,
 				EB51DBD21496138A00929A4A /* CMImage.c in Sources */,
-				EB51DBD81496523800929A4A /* CMAssembly.m in Sources */,
 				EB51DBE414965C1200929A4A /* CoreMono.c in Sources */,
 				EB51DBE81496798500929A4A /* CMMethod.c in Sources */,
 				EB51DBEC14967A6300929A4A /* CMMethodDesc.c in Sources */,
 				EB04884D1499055100FE618E /* CMClass.c in Sources */,
+				ED0BD8CC149A1044003C1B7F /* CMJIT.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

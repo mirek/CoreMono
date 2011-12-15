@@ -97,4 +97,12 @@ typedef struct __CMMethodStruct {
 
 typedef __CMMethodType* CMMethodRef;
 
+
+typedef struct __CMJITStruct {
+    CFAllocatorRef allocator;
+    CFIndex retainCount;
+} __CMJITType;
+
+typedef __CMJITType* CMJITRef;
+
 #endif

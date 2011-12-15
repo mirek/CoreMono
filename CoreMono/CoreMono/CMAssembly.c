@@ -7,27 +7,29 @@
 
 #include "CMAssembly.h"
 
-CMAssemblyRef CMAssemblyCreateWithDomain(CMDomainRef domain) {
-    CMAssemblyRef assembly = NULL;
-    if (domain) {
-        assembly = CMAssemblyCreateWithDomainAndPath(domain, domain->path);
+//CMAssemblyRef CMAssemblyCreateWithDomain(CMDomainRef domain) {
+//    CMAssemblyRef assembly = NULL;
+//    if (domain) {
+//        assembly = CMAssemblyCreateWithDomainAndPath(domain, domain->path);
+//    }
+//    return assembly;
+//}
+
+CMAssemblyRef CMAssemblyCreate(CFAllocatorRef allocator) {
+    CMAssemblyRef assembly = CFAllocatorAllocate(allocator, sizeof(__CMAssemblyType), 0);
+    if (assembly) {
+        memset(assembly, 0, sizeof(__CMAssemblyType));
+        assembly->retainCount = 1;
     }
     return assembly;
 }
 
-CMAssemblyRef CMAssemblyCreateWithDomainAndPath(CMDomainRef domain, CFStringRef path) {
+CMAssemblyRef CMAssemblyCreateWithMonoAssembly(CFAllocatorRef allocator, MonoAssembly *monoAssembly) {
     CMAssemblyRef assembly = NULL;
-    if (domain) {
-        if ((assembly = CFAllocatorAllocate(domain->allocator, sizeof(__CMAssemblyType), 0))) {
-            memset(assembly, 0, sizeof(__CMAssemblyType));
-            assembly->allocator = domain->allocator ? CFRetain(domain->allocator) : NULL;
-            assembly->retainCount = 1;
-            assembly->domain = CMDomainRetain(domain);
-            assembly->path = CFRetain(path);
-            IF_UTF8(domain->allocator, path, pathUtf8, {
-                assembly->monoAssembly = mono_domain_assembly_open(domain->monoDomain, pathUtf8);
-                assembly->image = CMImageCreateWithMonoImage(assembly->allocator, mono_assembly_get_image(assembly->monoAssembly));
-            });
+    if (monoAssembly) {
+        if ((assembly = CMAssemblyCreate(allocator))) {
+            assembly->monoAssembly = monoAssembly;
+            assembly->image = CMImageCreateWithMonoImage(assembly->allocator, mono_assembly_get_image(assembly->monoAssembly));
         }
     }
     return assembly;
@@ -44,11 +46,11 @@ CMAssemblyRef CMAssemblyRelease(CMAssemblyRef assembly) {
     return assembly;
 }
 
-void CMAssemblyMain(CMAssemblyRef assembly, int argc, const char *argv[]) {
-    if (assembly) {
-        mono_jit_exec(assembly->domain->monoDomain, assembly->monoAssembly, argc, (char **) argv);
-    }
-}
+//void CMAssemblyMain(CMAssemblyRef assembly, int argc, const char *argv[]) {
+//    if (assembly) {
+//        mono_jit_exec(assembly->domain->monoDomain, assembly->monoAssembly, argc, (char **) argv);
+//    }
+//}
 
 MonoImage *CMAssemblyGetMonoImage(CMAssemblyRef assembly) {
     MonoImage *monoImage = NULL;
@@ -59,6 +61,9 @@ MonoImage *CMAssemblyGetMonoImage(CMAssemblyRef assembly) {
 }
 
 CMImageRef CMAssemblyGetImage(CMAssemblyRef assembly) {
-    return assembly ? assembly->image : NULL;
+    CMImageRef image = NULL;
+    if (assembly) {
+        image = assembly->image;
+    }
+    return image;
 }
-

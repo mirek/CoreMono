@@ -11,11 +11,15 @@
 #include "CoreMono.h"
 
 CMDomainRef __CMDomainCreate                 (CFAllocatorRef allocator);
-CMDomainRef CMDomainCreateWithPath           (CFAllocatorRef allocator, CFStringRef path);
-CMDomainRef CMDomainCreateWithNameAndVersion (CFAllocatorRef allocator, CFStringRef name, CFStringRef version);
+//CMDomainRef CMDomainCreateWithPath           (CFAllocatorRef allocator, CFStringRef path);
+//CMDomainRef CMDomainCreateWithNameAndVersion (CFAllocatorRef allocator, CFStringRef name, CFStringRef version);
+
+CMDomainRef CMDomainCreateWithMonoDomain     (CFAllocatorRef allocator, MonoDomain *monoDomain);
 
 CMDomainRef CMDomainRetain                   (CMDomainRef domain);
 CMDomainRef CMDomainRelease                  (CMDomainRef domain);
+
+CMAssemblyRef CMDomainCreateAssemblyByOpeningPath(CMDomainRef domain, CFStringRef path);
 
 //CMAssemblyRef CMDomainCreateAssembly         (CMDomainRef domain, CFStringRef path);
 

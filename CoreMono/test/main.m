@@ -11,28 +11,27 @@
 #include "CoreMono.h"
 
 int main (int argc, const char *argv[]) {
-    CMDomainRef domain = CMDomainCreateWithPath(kCFAllocatorDefault, CFSTR("test1.exe"));
+    CMDomainRef domain = CMJITCreateDomainByInitializingWithPath(kCFAllocatorDefault, CFSTR("test1.exe"));
     if (domain) {
-        CMAssemblyRef assembly = CMAssemblyCreateWithDomain(domain);
+        CMAssemblyRef assembly = CMDomainCreateAssemblyByOpeningPath(domain, CFSTR("test1.exe"));
         if (assembly) {
-            CMAssemblyMain(assembly, argc, argv);
+            CMJITExec(domain, assembly, argc, (char **) argv);
             
             CMClassRef klass = CMClassCreateWithAssembly(assembly, CFSTR("test"), CFSTR("test1"));
             if (klass) {
-                
-                
+
 //                CFTypeRef result = CMImageCreateObjectByInvokingMethodWithName(CMAssemblyGetImage(assembly), CFSTR("test.test1:ReturnInt32WithInt32"), TRUE, &i);
 //                CFShow(result);
-                
-                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:ReturnInt32WithInt32"), TRUE);
+
+                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:GetDictionary"), TRUE);
                 if (methodDesc) {
                     
                     MonoMethod *monoMethod = CMImageGetMonoMethodWithMethodDesc(CMAssemblyGetImage(assembly), methodDesc);
                     if (monoMethod) {
-                        int32_t i = 2011;
-                        void *params[1] = { &i };
-                        MonoObject *monoObject = mono_runtime_invoke(monoMethod, NULL, params, NULL);
-                        CFTypeRef object = CMCreateObjectWithMonoObject(monoObject);
+//                        int32_t i = 2011;
+//                        void *params[1] = { &i };
+                        MonoObject *monoObject = mono_runtime_invoke(monoMethod, NULL, NULL, NULL);
+                        CFTypeRef object = CMCreateObjectWithMonoObject(NULL, monoObject);
                         CFShow(object);
                         if (object) {
                             CFRelease(object);

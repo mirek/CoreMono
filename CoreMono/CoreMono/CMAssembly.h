@@ -10,12 +10,15 @@
 
 #include "CoreMono.h"
 
-CMAssemblyRef CMAssemblyCreateWithDomainAndPath (CMDomainRef domain, CFStringRef path) CF_RETURNS_RETAINED;
-CMAssemblyRef CMAssemblyCreateWithDomain        (CMDomainRef domain) CF_RETURNS_RETAINED;
+CMAssemblyRef CMAssemblyCreate(CFAllocatorRef allocator);
+CMAssemblyRef CMAssemblyCreateWithMonoAssembly(CFAllocatorRef allocator, MonoAssembly *monoAssembly);
+
+//CMAssemblyRef CMAssemblyCreateWithDomainAndPath (CMDomainRef domain, CFStringRef path) CF_RETURNS_RETAINED;
+//CMAssemblyRef CMAssemblyCreateWithDomain        (CMDomainRef domain) CF_RETURNS_RETAINED;
 CMAssemblyRef CMAssemblyRetain                  (CMAssemblyRef assembly);
 CMAssemblyRef CMAssemblyRelease                 (CMAssemblyRef assembly);
 
-void          CMAssemblyMain                    (CMAssemblyRef assembly, int argc, const char *argv[]);
+//void          CMAssemblyMain                    (CMAssemblyRef assembly, int argc, const char *argv[]);
 
 CMImageRef    CMAssemblyGetImage                (CMAssemblyRef assembly);
 
