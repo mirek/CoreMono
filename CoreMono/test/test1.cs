@@ -23,7 +23,9 @@ namespace test {
                 { "floats", new float[] { 0.0f, 1.1f, 2.2f, 3.3f, 5.5f, 7.7f } },
                 { "booleans", new bool[] { true, false, true, false, true, false } },
                 { "strings", new string[] { "one", "two", "three" } },
-                { "mix 1", new object[] { 1, "two", 3.3, 4.4f, false, true, null } }
+                { "mix 1", new object[] { 1, "two", 3.3, 4.4f, false, true, null } },
+                { "exception", new Exception("foo") },
+                { "bytes", new byte[] { 0, 1, 2, 3, 4, 5 } }
             };
         }
         

@@ -53,6 +53,8 @@ CFDictionaryRef        CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFA
 CFMutableDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject(CFAllocatorRef allocator, MonoObject *monoObject);
 CFArrayRef             CMCreateArrayWithMonoSubclassOfArrayObject(CFAllocatorRef allocator, MonoObject *monoObject);
 
+CFDataRef CMCreateDataWithMonoInlineByteArrayObject(CFAllocatorRef allocator, MonoObject *monoObject);
+
 CFArrayRef             CMCreateArrayWithMonoInlineBooleanArrayObject (CFAllocatorRef allocator, MonoObject *monoObject);
 
 CFArrayRef CMCreateArrayWithMonoInlineArrayObject        (CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size);

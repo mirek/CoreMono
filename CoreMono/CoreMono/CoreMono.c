@@ -199,6 +199,22 @@ CFArrayRef CMCreateArrayWithMonoSubclassOfArrayObject(CFAllocatorRef allocator, 
     return array;
 }
 
+CFDataRef CMCreateDataWithMonoInlineByteArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
+    CFDataRef data = NULL;
+    if (monoObject) {
+        uintptr_t n = mono_array_length((MonoArray *) monoObject);
+        char *bytes = CFAllocatorAllocate(allocator, n, 0);
+        if (bytes) {
+//            mono_array_memcpy_refs(bytes, 0, (MonoArray *) monoObject, 0, n);
+            for (uintptr_t i = 0; i < n; i++) {
+                bytes[i] = mono_array_get((MonoArray *) monoObject, char, i);
+            }
+            data = CFDataCreateWithBytesNoCopy(allocator, (const UInt8 *) bytes, n, allocator);
+        }
+    }
+    return data;
+}
+
 CFArrayRef CMCreateArrayWithMonoInlineBooleanArrayObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     CFArrayRef array = NULL;
     if (monoObject) {
@@ -307,6 +323,7 @@ CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *mon
     if (monoObject) {
         MonoClass *monoClass = mono_object_get_class(monoObject);
         if      (IS_CLASS(monoClass, "System", "Boolean[]" )) result = CMCreateArrayWithMonoInlineBooleanArrayObject (allocator, monoObject);
+        else if (IS_CLASS(monoClass, "System", "Byte[]"    )) result = CMCreateDataWithMonoInlineByteArrayObject     (allocator, monoObject);
         else if (IS_CLASS(monoClass, "System", "Int32[]"   )) result = CMCreateArrayWithMonoInlineInt32ArrayObject   (allocator, monoObject);
         else if (IS_CLASS(monoClass, "System", "Int64[]"   )) result = CMCreateArrayWithMonoInlineInt64ArrayObject   (allocator, monoObject);
         else if (IS_CLASS(monoClass, "System", "UInt32[]"  )) result = CMCreateArrayWithMonoInlineUInt32ArrayObject  (allocator, monoObject);
