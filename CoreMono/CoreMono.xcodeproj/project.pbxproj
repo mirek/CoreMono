@@ -56,7 +56,6 @@
 		ED11C947149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */; };
 		ED11C948149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */; };
 		ED11C949149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */; };
-		ED11C94B149F9D0F00557FA8 /* CoreMonoToCF.h in Headers */ = {isa = PBXBuildFile; fileRef = ED11C94A149F9D0F00557FA8 /* CoreMonoToCF.h */; };
 		ED11C94D149F9D2700557FA8 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */; };
 		ED11C94E149F9D2700557FA8 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */; };
 		ED11C94F149F9D2700557FA8 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */; };
@@ -64,6 +63,7 @@
 		ED11C953149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */; };
 		ED11C954149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */; };
 		ED11C955149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */; };
+		ED11C957149FA3EB00557FA8 /* CoreMonoToCF.h in Headers */ = {isa = PBXBuildFile; fileRef = ED11C956149FA3EB00557FA8 /* CoreMonoToCF.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,10 +140,10 @@
 		ED0BD8CE149A10D1003C1B7F /* CMJIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMJIT.h; sourceTree = "<group>"; };
 		ED11C944149F9CF200557FA8 /* CoreMonoFromCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoFromCF.h; sourceTree = "<group>"; };
 		ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoFromCF.c; sourceTree = "<group>"; };
-		ED11C94A149F9D0F00557FA8 /* CoreMonoToCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoToCF.h; sourceTree = SOURCE_ROOT; };
 		ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoToCF.c; sourceTree = "<group>"; };
 		ED11C950149F9F1D00557FA8 /* CoreMonoHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoHelpers.h; sourceTree = "<group>"; };
 		ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoHelpers.c; sourceTree = "<group>"; };
+		ED11C956149FA3EB00557FA8 /* CoreMonoToCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoToCF.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,7 +231,7 @@
 				ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */,
 				ED11C944149F9CF200557FA8 /* CoreMonoFromCF.h */,
 				ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */,
-				ED11C94A149F9D0F00557FA8 /* CoreMonoToCF.h */,
+				ED11C956149FA3EB00557FA8 /* CoreMonoToCF.h */,
 				ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */,
 				EB51DBC114952A1100929A4A /* CMAssembly.h */,
 				EB51DBB9149504FB00929A4A /* CMAssembly.c */,
@@ -308,8 +308,8 @@
 				EB048849149904A500FE618E /* CMClass.h in Headers */,
 				ED0BD8CF149A10D1003C1B7F /* CMJIT.h in Headers */,
 				ED11C945149F9CF200557FA8 /* CoreMonoFromCF.h in Headers */,
-				ED11C94B149F9D0F00557FA8 /* CoreMonoToCF.h in Headers */,
 				ED11C951149F9F1D00557FA8 /* CoreMonoHelpers.h in Headers */,
+				ED11C957149FA3EB00557FA8 /* CoreMonoToCF.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
