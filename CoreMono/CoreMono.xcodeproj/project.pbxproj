@@ -52,6 +52,11 @@
 		ED0BD8CB149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
 		ED0BD8CC149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
 		ED0BD8CF149A10D1003C1B7F /* CMJIT.h in Headers */ = {isa = PBXBuildFile; fileRef = ED0BD8CE149A10D1003C1B7F /* CMJIT.h */; };
+		ED11C93D149F564600557FA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB51DB81149503D300929A4A /* Foundation.framework */; };
+		ED11C93F149F744500557FA8 /* mono_ext.h in Headers */ = {isa = PBXBuildFile; fileRef = ED11C93E149F744500557FA8 /* mono_ext.h */; };
+		ED11C941149F745300557FA8 /* mono_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C940149F745300557FA8 /* mono_ext.c */; };
+		ED11C942149F745300557FA8 /* mono_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C940149F745300557FA8 /* mono_ext.c */; };
+		ED11C943149F745300557FA8 /* mono_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C940149F745300557FA8 /* mono_ext.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +132,8 @@
 		EB51DBED14967A7400929A4A /* CMMethodDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMethodDesc.h; sourceTree = "<group>"; };
 		ED0BD8C9149A1044003C1B7F /* CMJIT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMJIT.c; sourceTree = "<group>"; };
 		ED0BD8CE149A10D1003C1B7F /* CMJIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMJIT.h; sourceTree = "<group>"; };
+		ED11C93E149F744500557FA8 /* mono_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mono_ext.h; sourceTree = "<group>"; };
+		ED11C940149F745300557FA8 /* mono_ext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mono_ext.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +161,7 @@
 			files = (
 				EB51DBB0149503ED00929A4A /* CoreFoundation.framework in Frameworks */,
 				EB51DBBE149511A700929A4A /* Mono.framework in Frameworks */,
+				ED11C93D149F564600557FA8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +214,8 @@
 		EB51DB82149503D300929A4A /* CoreMono */ = {
 			isa = PBXGroup;
 			children = (
+				ED11C93E149F744500557FA8 /* mono_ext.h */,
+				ED11C940149F745300557FA8 /* mono_ext.c */,
 				EB51DB83149503D300929A4A /* Supporting Files */,
 				EB51DB89149503D300929A4A /* CoreMono.h */,
 				EB51DBE114965C1200929A4A /* CoreMono.c */,
@@ -285,6 +295,7 @@
 				EB048849149904A500FE618E /* CMClass.h in Headers */,
 				EB04884F14991C2000FE618E /* CMCreateObject.c in Headers */,
 				ED0BD8CF149A10D1003C1B7F /* CMJIT.h in Headers */,
+				ED11C93F149F744500557FA8 /* mono_ext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +432,7 @@
 				EB51DBEA14967A6300929A4A /* CMMethodDesc.c in Sources */,
 				EB04884B1499055100FE618E /* CMClass.c in Sources */,
 				ED0BD8CA149A1044003C1B7F /* CMJIT.c in Sources */,
+				ED11C941149F745300557FA8 /* mono_ext.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +449,7 @@
 				EB51DBEB14967A6300929A4A /* CMMethodDesc.c in Sources */,
 				EB04884C1499055100FE618E /* CMClass.c in Sources */,
 				ED0BD8CB149A1044003C1B7F /* CMJIT.c in Sources */,
+				ED11C942149F745300557FA8 /* mono_ext.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +466,7 @@
 				EB51DBEC14967A6300929A4A /* CMMethodDesc.c in Sources */,
 				EB04884D1499055100FE618E /* CMClass.c in Sources */,
 				ED0BD8CC149A1044003C1B7F /* CMJIT.c in Sources */,
+				ED11C943149F745300557FA8 /* mono_ext.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

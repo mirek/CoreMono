@@ -14,6 +14,8 @@
 #include <Mono/mono-2.0/mono/metadata/assembly.h>
 #include <Mono/mono-2.0/mono/metadata/debug-helpers.h>
 
+#include "mono_ext.h"
+
 #include "CMTypes.h"
 #include "CMDomain.h"
 #include "CMAssembly.h"
@@ -86,9 +88,15 @@ void CMAddInternalCall(CFStringRef name, const void *function);
 
 MonoObject *CMRuntimeInvoke(CMMethodRef method, MonoObject *monoObject, void *params[], CFErrorRef *error);
 
-MonoString *CMCreateMonoStringWithString (CFAllocatorRef allocator, CFStringRef string);
-MonoObject *CMCreateMonoObjectWithNumber (CFAllocatorRef allocator, CFNumberRef number);
-MonoArray  *CMCreateMonoArrayWithArray   (CFAllocatorRef allocator, CFArrayRef array);
-MonoObject *CMCreateMonoObjectWithObject (CFAllocatorRef allocator, CFTypeRef object);
-
 CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *monoObject);
+
+MonoObject *CMMonoGuidWithUUID(CFUUIDRef uuid);
+MonoObject *CMMonoBooleanObjectWithBoolean(CFBooleanRef boolean);
+MonoArray  *CMMonoInlineByteArrayWithData (CFDataRef data);
+MonoObject *CMMonoHashtableWithDictionary (CFDictionaryRef dictionary);
+MonoObject *CMMonoDateTimeWithDate        (CFDateRef date);
+MonoString *CMMonoStringWithString        (CFStringRef string);
+MonoObject *CMMonoObjectWithNumber        (CFNumberRef number);
+MonoArray  *CMMonoArrayWithArray          (CFArrayRef array);
+MonoObject *CMMonoObjectWithObject        (CFTypeRef object);
+

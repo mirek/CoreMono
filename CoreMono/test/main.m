@@ -11,6 +11,8 @@
 #include "CoreMono.h"
 
 int main (int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     CMDomainRef domain = CMJITCreateDomainByInitializingWithPath(kCFAllocatorDefault, CFSTR("test1.exe"));
     if (domain) {
         CMAssemblyRef assembly = CMDomainCreateAssemblyByOpeningPath(domain, CFSTR("test1.exe"));
@@ -23,14 +25,23 @@ int main (int argc, const char *argv[]) {
 //                CFTypeRef result = CMImageCreateObjectByInvokingMethodWithName(CMAssemblyGetImage(assembly), CFSTR("test.test1:ReturnInt32WithInt32"), TRUE, &i);
 //                CFShow(result);
 
-                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:PrintDictionary"), TRUE);
+                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:PrintWhatever"), TRUE);
                 if (methodDesc) {
                     
                     MonoMethod *monoMethod = CMImageGetMonoMethodWithMethodDesc(CMAssemblyGetImage(assembly), methodDesc);
                     if (monoMethod) {
 //                        int32_t i = 2011;
                         
-                        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys: @"foo", @"bar", nil];
+                        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                    @"foo", @"string",
+                                                    [NSNumber numberWithFloat: 1.123], @"float",
+                                                    [NSNumber numberWithDouble: 4.567], @"double",
+                                                    [NSNumber numberWithInt: 3], @"int",
+                                                    [NSNumber numberWithLong: 34], @"long",
+                                                    [NSNumber numberWithLongLong: 1ll], @"long long",
+                                                    [NSArray arrayWithObjects: @"one", [NSNumber numberWithShort: 2], [NSNumber numberWithFloat: 3.3], kCFBooleanTrue, kCFBooleanFalse, kCFNull, @"last", nil], @"array",
+                                                    [NSData dataWithBytes: (const char[]) { 'a', 'b', 'c' } length: 3], @"data",
+                                                    nil];
 
                         void *params[1] = { CMMonoObjectWithObject(dictionary) };
                         MonoObject *monoObject = mono_runtime_invoke(monoMethod, NULL, params, NULL);
@@ -93,6 +104,9 @@ int main (int argc, const char *argv[]) {
     } else {
         printf("Error creating domain\n");
     }
+    
+    [pool drain];
+    
     return 0;
 }
 

@@ -6,13 +6,44 @@ namespace test {
 
     public class test1 {
         
-        public static void PrintDictionary(Dictionary<string, object> dictionary) {
-            if (dictionary != null) {
-                foreach (KeyValuePair<string, object> pair in dictionary) {
-                    Console.WriteLine(" - {0} : {1}", pair.Key, pair.Value);
+        public static void PrintWhatever(object whatever) {
+            if (whatever != null) {
+                if (whatever is byte[]) {
+                    byte[] array = whatever as byte[];
+                    Console.Write("[byte[{0}] ", array.Length);
+                    foreach (byte e in array) {
+                        Console.Write("{0} ", e);
+                    }
+                    Console.Write("]");
+                } else if (whatever is object[]) {
+                    object[] array = whatever as object[];
+                    Console.Write("[object[{0}] ", array.Length);
+                    foreach (object e in array) {
+                        PrintWhatever(e);
+                        Console.Write(" ");
+                    }
+                    Console.Write("]");
+                } else if (whatever is Dictionary<string, object>) {
+                    Dictionary<string, object> dictionary = whatever as Dictionary<string, object>;
+                    Console.WriteLine("Dictionary<string, object>:");
+                    foreach (KeyValuePair<string, object> pair in dictionary) {
+                        Console.WriteLine(" - {0} : {1}", pair.Key, pair.Value);
+                    }
+                } else if (whatever is Hashtable) {
+                    Hashtable hashtable = whatever as Hashtable;
+                    Console.WriteLine("Hashtable:");
+                    foreach (DictionaryEntry pair in hashtable) {
+                        Console.Write(" - ");
+                        PrintWhatever(pair.Key);
+                        Console.Write(" : ");
+                        PrintWhatever(pair.Value);
+                        Console.WriteLine();
+                    }
+                } else {
+                    Console.Write("{0}", whatever);
                 }
             } else {
-                Console.WriteLine("<null>");
+                Console.Write("[null]");
             }
         }
         

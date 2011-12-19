@@ -80,6 +80,7 @@ CFDateRef CMCreateDateWithMonoDateTimeObject(CFAllocatorRef allocator, MonoObjec
         uint64_t ticks = * (uint64_t *) mono_object_unbox(monoObject);
         
         // Absolute time is the first instant of the 1 January 2001, GMT
+        // TODO: This is wrong, offset abs time - unix epoch
         date = CFDateCreate(allocator, ((ticks) - 621355968000000000LL) / 10000000);
     }
     return date;
@@ -486,17 +487,17 @@ MonoObject *CMRuntimeInvoke(CMMethodRef method, MonoObject *monoObject, void *pa
     return mono_runtime_invoke(CMMethodGetMonoMethod(method), monoObject, params, NULL);
 }
 
-MonoString *CMCreateMonoStringWithString(CFAllocatorRef allocator, CFStringRef string) {
+MonoString *CMMonoStringWithString(CFStringRef string) {
     MonoString *monoString = NULL;
     if (string) {
-        IF_UTF8(allocator, string, utf8, {
+        IF_UTF8(kCFAllocatorDefault, string, utf8, {
             monoString = mono_string_new(mono_domain_get(), utf8);
         });
     }
     return monoString;
 }
 
-MonoObject *CMCreateMonoObjectWithNumber(CFAllocatorRef allocator, CFNumberRef number) {
+MonoObject *CMMonoObjectWithNumber(CFNumberRef number) {
     MonoObject *monoNumber = NULL;
     if (number) {
         switch (CFNumberGetType(number)) {
@@ -613,35 +614,277 @@ MonoObject *CMCreateMonoObjectWithNumber(CFAllocatorRef allocator, CFNumberRef n
     return monoNumber;
 }
 
-MonoArray *CMCreateMonoArrayWithArray(CFAllocatorRef allocator, CFArrayRef array) {
+MonoObject *CMMonoDateTimeWithDate(CFDateRef date) {
+    MonoObject *monoObject = NULL;
+    if (date) {
+        CFAbsoluteTime absoluteTime = CFDateGetAbsoluteTime(date);
+        int64_t ticks = (int64_t) absoluteTime;
+        MonoClass *monoClass = mono_class_from_name(mono_get_corlib(), "System", "DateTime");
+        MonoObject *monoExceptionObject = NULL;
+        monoObject = mono_object_init(mono_domain_get(), monoClass, 1, (const char *[]) { "System.Int64" }, (void *[]) { &ticks }, &monoExceptionObject);
+        if (monoExceptionObject) {
+            fprintf(stderr, "ERROR: exception in %p", monoExceptionObject);
+        }
+    }
+    return monoObject;
+}
+
+MonoArray *CMMonoArrayWithArray(CFArrayRef array) {
     MonoArray *monoArray = NULL;
     if (array) {
         CFIndex count = CFArrayGetCount(array);
         monoArray = mono_array_new(mono_domain_get(), mono_get_object_class(), count);
+        // TODO: we need to invoke .ctor
         for (CFIndex i = 0; i < count; i++) {
-            mono_array_set(monoArray, MonoObject *, i, CMCreateMonoObjectWithObject(allocator, CFArrayGetValueAtIndex(array, i)));
+            mono_array_set(monoArray, MonoObject *, i, CMMonoObjectWithObject(CFArrayGetValueAtIndex(array, i)));
         }
     }
     return monoArray;
 }
 
-MonoObject *CMCreateMonoObjectWithObject(CFAllocatorRef allocator, CFTypeRef object) {
+//MonoMethod *CMMethodSearchWithClass()
+
+//bool mono_signature_has_param_type_names2(MonoMethodSignature *sig, uint32_t count, ...) {
+//    bool result = 0;
+//    MonoType *p = NULL;
+//    void *iter = NULL;
+//    va_list vp;
+//    
+//    va_start(vp, count);
+//    
+//    if (mono_signature_get_param_count(sig) == count) {
+//        result = 1;
+//        while ((p = mono_signature_get_params(sig, &iter))) {
+//            const char *p2 = va_arg(vp, const char *);
+//            if (strcmp(mono_type_get_name(p), p2) != 0) {
+//                result = 0;
+//                break;
+//            }
+//        }
+//    }
+//
+//    va_end(vp);
+//    
+//    return result;
+//}
+
+//bool CMMonoMethodSignatureMatchesMonoParamTypes(MonoMethodSignature *monoMethodSignature, MonoType **monoTypes, CFIndex n) {
+//    bool result = 0;
+//    if (monoMethodSignature) {
+//        void *paramsIterator = NULL;
+//        MonoType *monoType = NULL;
+//        if (mono_signature_get_param_count(monoMethodSignature) == n) {
+//            
+//        }
+//        
+//        for () {
+//            
+//        }
+//        
+//        MONO_TYPE_U2
+//        
+//        while ((monoType = mono_signature_get_params(monoMethodSignature, &paramsIterator))) {
+//            if (strcmp(mono_type_get_name(monoType), "Int32")) {
+//                monoObject = mono_object_new(mono_domain_get(), monoClass);
+//                
+//                int32_t n_ = (int32_t) n;
+//                void *params[1] = { &n_ };
+//                MonoObject *monoExceptionObject = NULL;
+//                (void) mono_runtime_invoke(monoMethod, monoObject, params, &monoExceptionObject);
+//                if (monoExceptionObject) {
+//                    fprintf(stderr, "ERROR: Exception in constructor, %p\n", monoExceptionObject);
+//                }
+//                
+//                break;
+//            }
+//        }
+//    }
+//    return result;
+//}
+
+//bool CMMonoMethodHasMonoParamTypes(MonoMethod *monoMethod, MonoType **types, CFIndex n) {
+//    bool result = 0;
+//    if (monoMethod) {
+//        
+//    }
+//    return result;
+//}
+
+//MonoObject *CMMonoObjectInit(MonoImage *monoImageOrNull, MonoClass *monoClass, uint32_t MonoType **paramTypes, void **paramValues) {
+//    MonoObject *monoObject = NULL;
+//    MonoImage *monoImage = monoImageOrNull ? monoImageOrNull : mono_get_corlib();
+//    if (monoImage) {
+//        if (monoClass) {
+//            MonoMethod *monoMethod = NULL;
+//            void *iterator = NULL;
+//            while ((monoMethod = mono_class_get_methods(monoClass, &iterator))) {
+//                if (strcmp(mono_method_get_name(monoMethod), ".ctor") == 0) {
+//                    if (mono_signature_has_param_type_names(mono_method_signature(monoMethod), 1, "Int32")) {
+//                        monoObject = mono_object_new(mono_domain_get(), monoClass);
+//                        
+//                        int32_t n_ = (int32_t) n;
+//                        void *params[1] = { &n_ };
+//                        MonoObject *monoExceptionObject = NULL;
+//                        (void) mono_runtime_invoke(monoMethod, monoObject, params, &monoExceptionObject);
+//                        if (monoExceptionObject) {
+//                            fprintf(stderr, "ERROR: Exception in constructor, %p\n", monoExceptionObject);
+//                        }
+//                        
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    return monoObject;
+//}
+
+MonoObject *CMMonoGuidWithUUID(CFUUIDRef uuid) {
     MonoObject *monoObject = NULL;
-         if (CFGetTypeID(object) == CFStringGetTypeID()) monoObject = (MonoObject *) CMCreateMonoStringWithString (allocator, (CFStringRef) object);
-    else if (CFGetTypeID(object) == CFNumberGetTypeID()) monoObject = (MonoObject *) CMCreateMonoObjectWithNumber (allocator, (CFNumberRef) object);
-    else if (CFGetTypeID(object) == CFArrayGetTypeID())  monoObject = (MonoObject *) CMCreateMonoArrayWithArray   (allocator, (CFArrayRef)  object);
+    
+    static MonoClass *monoClass = NULL; if (monoClass == NULL) monoClass = mono_class_from_name(mono_get_corlib(), "System", "Guid");
+    static MonoMethod *monoCtor = NULL; if (monoCtor == NULL) monoCtor = mono_class_find_ctor_matching_param_type_names(monoClass, 11, (const char *[11]) { "System.UInt32", "System.UInt16", "System.UInt16", "System.Byte", "System.Byte", "System.Byte", "System.Byte", "System.Byte", "System.Byte", "System.Byte", "System.Byte" });
+
+    if (uuid) {
+        CFUUIDBytes bytes = CFUUIDGetUUIDBytes(uuid);
+        uint32_t a = (bytes.byte0 << 24) | (bytes.byte1 << 16) | (bytes.byte2 << 8) | bytes.byte3;
+        uint16_t b = (bytes.byte4 << 8) | bytes.byte5;
+        uint16_t c = (bytes.byte6 << 8) | bytes.byte7;
+        monoObject = mono_object_new(mono_domain_get(), monoClass);
+        (void) mono_runtime_invoke(monoCtor, monoObject, (void *[11]) { &a, &b, &c, &bytes.byte8, &bytes.byte9, &bytes.byte10, &bytes.byte11, &bytes.byte12, &bytes.byte13, &bytes.byte14, &bytes.byte15 }, NULL);
+    }
     return monoObject;
 }
 
+MonoObject *CMMonoBooleanObjectWithBoolean(CFBooleanRef boolean) {
+    MonoObject *monoObject = NULL;
+    if (boolean) {
+        MonoBoolean monoBoolean = boolean == kCFBooleanTrue ? 1 : 0;
+        monoObject = CM_BOX_BOOLEAN(monoBoolean);
+    }
+    return monoObject;
+}
 
-#pragma Mono stuff
+MonoArray *CMMonoInlineByteArrayWithData(CFDataRef data) {
+    MonoArray *monoArray = NULL;
+    
+    static MonoClass *monoClass = NULL; if (monoClass == NULL) monoClass = mono_class_from_name(mono_get_corlib(), "System.Runtime.InteropServices", "Marshal");
+    static MonoMethod *monoMethod = NULL; if (monoMethod == NULL) monoMethod = mono_class_find_method_matching_param_type_names(monoClass, "Copy", 4, (const char *[]) { "System.IntPtr", "System.Byte[]", "System.Int32", "System.Int32" });
+    
+    if (data) {
+        CFIndex n = CFDataGetLength(data);
+        monoArray = mono_array_new(mono_domain_get(), mono_get_byte_class(), n);
+        
+        int32_t source = (int32_t) CFDataGetBytePtr(data);
+        int32_t index = 0;
+        int32_t length = (int32_t) n;
+        
+        MonoObject *monoExceptionObject = NULL;
+        (void) mono_runtime_invoke(monoMethod, NULL, (void *[]) { &source, monoArray, &index, &length }, &monoExceptionObject);
+        if (monoExceptionObject) {
+            fprintf(stderr, "ERROR: exception at %p\n", monoExceptionObject);
+        }
+    }
+    return monoArray;
+}
+
+MonoObject *CMMonoHashtableWithDictionary(CFDictionaryRef dictionary) {
+    MonoObject *monoObject = NULL;
+    if (dictionary) {
+        CFIndex n = CFDictionaryGetCount(dictionary);
+        if (n > 0) {
+            CFTypeRef *keys = CFAllocatorAllocate(kCFAllocatorDefault, sizeof(CFTypeRef) * n, 0);
+            if (keys) {
+                CFTypeRef *values = CFAllocatorAllocate(kCFAllocatorDefault, sizeof(CFTypeRef) * n, 0);
+                if (values) {
+                    CFDictionaryGetKeysAndValues(dictionary, keys, values);
+                    
+                    MonoClass *monoClass = mono_class_from_name(mono_get_corlib(), "System.Collections", "Hashtable");
+                    
+                    int32_t n_ = n;
+                    monoObject = mono_object_init(mono_domain_get(), monoClass, 1, (const char *[]) { "System.Int32" }, (void *[]) { &n_ }, NULL);
+                    
+                    // Set key/values
+                    {
+                        if (monoObject) {
+                            MonoMethodDesc *monoMethodDesc = mono_method_desc_new("System.Collections.Hashtable:Add", 1);
+                            if (monoMethodDesc) {
+                                MonoMethod *monoMethod = mono_method_desc_search_in_class(monoMethodDesc, mono_object_get_class(monoObject));
+                                if (monoMethod) {
+                                    for (CFIndex i = 0; i < n; i++) {
+                                        void *params[] = { CMMonoObjectWithObject(keys[i]), CMMonoObjectWithObject(values[i]) };
+                                        if (params[0] && params[1]) {
+                                            MonoObject *monoExceptionObject = NULL;
+                                            (void) mono_runtime_invoke(monoMethod, monoObject, params, &monoExceptionObject);
+                                            if (monoExceptionObject) {
+                                                fprintf(stderr, "ERROR: exception %p\n", monoExceptionObject);
+                                            }
+                                        } else {
+                                            fprintf(stderr, "ERROR: Unexpected null in monoKeyObject = %p or monoValueObject = %p\n", params[0], params[1]);
+                                        }
+                                    }
+                                }
+                                mono_method_desc_free(monoMethodDesc);
+                            }
+                        }
+                    }
+                    CFAllocatorDeallocate(kCFAllocatorDefault, values);
+                }
+                CFAllocatorDeallocate(kCFAllocatorDefault, keys);
+            }
+        } else {
+        }
+        //        monoObject = mono_object_new(mono_domain_get(), mono_class_from_name(mono_assembly_get_image(mono_assembly_get_main()), "System.Collections.Generic", "Dictionary"))
+    }
+    return monoObject;
+}
+
+//MonoObject *CMMonoDictionaryOfStringAndObjectWithDictionary(CFDictionaryRef dictionary) {
+//    MonoObject *monoObject = NULL;
+//    if (dictionary) {
+//        CFIndex n = CFDictionaryGetCount(dictionary);
+//        monoObject
+//        if (n > 0) {
+//            CFTypeRef *keys = CFAllocatorAllocate(kCFAllocatorDefault, sizeof(CFTypeRef) * n, 0);
+//            CFTypeRef *values = CFAllocatorAllocate(kCFAllocatorDefault, sizeof(CFTypeRef) * n, 0);
+//        } else {
+//        }
+////        monoObject = mono_object_new(mono_domain_get(), mono_class_from_name(mono_assembly_get_image(mono_assembly_get_main()), "System.Collections.Generic", "Dictionary"))
+//    }
+//    return monoObject;
+//}
 
 MonoObject *CMMonoObjectWithObject(CFTypeRef object) {
     MonoObject *monoObject = NULL;
     if (object) {
-        if (CFGetTypeID(object) == CFDictionaryGetTypeID()) {
-            monoObject = mono_object_new(mono_domain_get(), mono_class_from_name(mono_assembly_get_image(mono_assembly_get_main()), "System.Collections.Generic", "Dictionary"));
-        }
+             if (CFGetTypeID(object) == CFStringGetTypeID())     monoObject = (MonoObject *) CMMonoStringWithString         ((CFStringRef)     object);
+        else if (CFGetTypeID(object) == CFNumberGetTypeID())     monoObject =                CMMonoObjectWithNumber         ((CFNumberRef)     object);
+        else if (CFGetTypeID(object) == CFArrayGetTypeID())      monoObject = (MonoObject *) CMMonoArrayWithArray           ((CFArrayRef)      object);
+        else if (CFGetTypeID(object) == CFDictionaryGetTypeID()) monoObject =                CMMonoHashtableWithDictionary  ((CFDictionaryRef) object);
+        else if (CFGetTypeID(object) == CFDateGetTypeID())       monoObject =                CMMonoDateTimeWithDate         ((CFDateRef)       object);
+        else if (CFGetTypeID(object) == CFDataGetTypeID())       monoObject = (MonoObject *) CMMonoInlineByteArrayWithData  ((CFDataRef)       object);
+        else if (CFGetTypeID(object) == CFBooleanGetTypeID())    monoObject = (MonoObject *) CMMonoBooleanObjectWithBoolean ((CFBooleanRef)    object);
+        else if (CFGetTypeID(object) == CFNullGetTypeID())       monoObject = (MonoObject *) NULL;
+        else if (CFGetTypeID(object) == CFUUIDGetTypeID())       monoObject = (MonoObject *) CMMonoGuidWithUUID             ((CFUUIDRef)       object);
+        //        CFNullGetTypeID();
+        
+
+        //CFUUIDCreateWithBytes(<#CFAllocatorRef alloc#>, <#UInt8 byte0#>, <#UInt8 byte1#>, <#UInt8 byte2#>, <#UInt8 byte3#>, <#UInt8 byte4#>, <#UInt8 byte5#>, <#UInt8 byte6#>, <#UInt8 byte7#>, <#UInt8 byte8#>, <#UInt8 byte9#>, <#UInt8 byte10#>, <#UInt8 byte11#>, <#UInt8 byte12#>, <#UInt8 byte13#>, <#UInt8 byte14#>, <#UInt8 byte15#>)
+        
+//        else if (CFGetTypeID(object) == CFBagGetTypeID())        monoObject =                CMMonoBagWithBag              ((CFBagRef)        object);
+//        else if (CFGetTypeID(object) == CFBinaryHeapGetTypeID())        monoObject =                CMMonoBagWithBag              ((CFBagRef)        object);
+
+//        CFBitVectorGetTypeID();
+//        CFErrorGetTypeID();
+//        CFMutableSetRef;
+//        CFPropertyListRef
+//        CFSocketGetTypeID();
+//        CFTimeZoneGetTypeID();
+//        CFTreeGetTypeID();
+//        CFURLGetTypeID();
+//        CFUUIDGetTypeID();
+//        CFXMLNodeGetTypeID();
     }
     return monoObject;
 }
+
