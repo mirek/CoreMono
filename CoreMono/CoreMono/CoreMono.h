@@ -1,9 +1,8 @@
 //
 //  CoreMono.h
-//  CoreMono
+//  CoreMono Framework
 //
-//  Created by Mirek Rusin on 11/12/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Mirek Rusin <mirek@me.com>
 //
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -49,54 +48,61 @@
 #define CM_BOX_UINT8(x)   mono_value_box(mono_domain_get(), mono_get_byte_class(),    &x)
 #define CM_BOX_BOOLEAN(x) mono_value_box(mono_domain_get(), mono_get_boolean_class(), &x)
 
-CFTypeRef              CMNullify(CFTypeRef value);
+void        CMAddInternalCall (CFStringRef name, const void *function);
+MonoObject *CMRuntimeInvoke   (CMMethodRef method, MonoObject *monoObject, void *params[], CFErrorRef *error);
 
-CFDictionaryRef        CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFAllocatorRef allocator, MonoObject *monoObject);
-CFMutableDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject(CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef             CMCreateArrayWithMonoSubclassOfArrayObject(CFAllocatorRef allocator, MonoObject *monoObject);
+CFTypeRef       CMNullify                                     (CFTypeRef value);
 
-CFDataRef CMCreateDataWithMonoInlineByteArrayObject(CFAllocatorRef allocator, MonoObject *monoObject);
+#pragma mark Core Foundation objects with Mono objects
 
-CFArrayRef             CMCreateArrayWithMonoInlineBooleanArrayObject (CFAllocatorRef allocator, MonoObject *monoObject);
+CFDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject  (CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFArrayRef CMCreateArrayWithMonoInlineNumberArrayObject        (CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size);
+CFDictionaryRef CMCreateDictionaryWithMonoSubclassOfIDictionaryObject (CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFArrayRef CMCreateArrayWithMonoInlineArrayObject(CFAllocatorRef allocator, MonoArray *monoArray);
-CFArrayRef CMCreateArrayWithMonoArrayListObject(CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoSubclassOfArrayObject    (CFAllocatorRef allocator, MonoObject *monoObject);
 
+CFDataRef       CMCreateDataWithMonoInlineByteArrayObject     (CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFArrayRef CMCreateArrayWithMonoInlineInt32ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef CMCreateArrayWithMonoInlineInt64ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef CMCreateArrayWithMonoInlineUInt32ArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef CMCreateArrayWithMonoInlineUInt64ArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef CMCreateArrayWithMonoInlineSingleArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
-CFArrayRef CMCreateArrayWithMonoInlineDoubleArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineBooleanArrayObject (CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFArrayRef CMCreateArrayWithMonoInlineStringArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineArrayObject        (CFAllocatorRef allocator, MonoArray *monoArray);
 
-CFBooleanRef CMCreateBooleanWithMonoBooleanObject (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoInt32Object    (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoInt64Object    (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoUInt32Object   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoUInt64Object   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoSingleObject   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFNumberRef  CMCreateNumberWithMonoDoubleObject   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFDateRef    CMCreateDateWithMonoDateTimeObject   (CFAllocatorRef allocator, MonoObject *monoObject);
-CFStringRef  CMCreateStringWithMonoStringObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineNumberArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject, CFNumberType type, int size);
 
-void CMAddInternalCall(CFStringRef name, const void *function);
+CFArrayRef      CMCreateArrayWithMonoInlineInt32ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineInt64ArrayObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineUInt32ArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineUInt64ArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineSingleArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineDoubleArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
+CFArrayRef      CMCreateArrayWithMonoInlineStringArrayObject  (CFAllocatorRef allocator, MonoObject *monoObject);
 
-MonoObject *CMRuntimeInvoke(CMMethodRef method, MonoObject *monoObject, void *params[], CFErrorRef *error);
+CFArrayRef      CMCreateArrayWithMonoArrayListObject          (CFAllocatorRef allocator, MonoObject *monoObject);
 
-CFTypeRef CMCreateObjectWithMonoObject(CFAllocatorRef allocator, MonoObject *monoObject);
+CFBooleanRef    CMCreateBooleanWithMonoBooleanObject (CFAllocatorRef allocator, MonoObject *monoObject);
 
-MonoObject *CMMonoGuidWithUUID(CFUUIDRef uuid);
-MonoObject *CMMonoBooleanObjectWithBoolean(CFBooleanRef boolean);
-MonoArray  *CMMonoInlineByteArrayWithData (CFDataRef data);
-MonoObject *CMMonoHashtableWithDictionary (CFDictionaryRef dictionary);
-MonoObject *CMMonoDateTimeWithDate        (CFDateRef date);
-MonoString *CMMonoStringWithString        (CFStringRef string);
-MonoObject *CMMonoObjectWithNumber        (CFNumberRef number);
-MonoArray  *CMMonoArrayWithArray          (CFArrayRef array);
-MonoObject *CMMonoObjectWithObject        (CFTypeRef object);
+CFNumberRef     CMCreateNumberWithMonoInt32Object    (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef     CMCreateNumberWithMonoInt64Object    (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef     CMCreateNumberWithMonoUInt32Object   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef     CMCreateNumberWithMonoUInt64Object   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef     CMCreateNumberWithMonoSingleObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+CFNumberRef     CMCreateNumberWithMonoDoubleObject   (CFAllocatorRef allocator, MonoObject *monoObject);
 
+CFDateRef       CMCreateDateWithMonoDateTimeObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+
+CFStringRef     CMCreateStringWithMonoStringObject   (CFAllocatorRef allocator, MonoObject *monoObject);
+
+CFTypeRef       CMCreateObjectWithMonoObject         (CFAllocatorRef allocator, MonoObject *monoObject);
+
+#pragma mark Mono objects with Core Foundation objects
+
+MonoObject *CMMonoBooleanObjectWithBoolean   (CFBooleanRef boolean);
+MonoObject *CMMonoObjectWithNumber           (CFNumberRef number);
+MonoString *CMMonoStringWithString           (CFStringRef string);
+MonoObject *CMMonoUriWithURL                 (CFURLRef url);
+MonoObject *CMMonoDateTimeWithDate           (CFDateRef date);
+MonoObject *CMMonoGuidWithUUID               (CFUUIDRef uuid);
+MonoArray  *CMMonoInlineByteArrayWithData    (CFDataRef data);
+MonoObject *CMMonoHashtableWithDictionary    (CFDictionaryRef dictionary);
+MonoArray  *CMMonoInlineObjectArrayWithArray (CFArrayRef array);
+MonoObject *CMMonoObjectWithObject           (CFTypeRef object);

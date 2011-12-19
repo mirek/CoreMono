@@ -1,9 +1,8 @@
 //
-//  File.c
-//  CoreMono
+//  mono_ext.c
+//  CoreMono Framework
 //
-//  Created by Mirek Rusin on 19/12/2011.
-//  Copyright (c) 2011 Inteliv Ltd. All rights reserved.
+//  Copyright (c) 2011 Mirek Rusin <mirek@me.com>
 //
 
 #include "mono_ext.h"
@@ -30,6 +29,15 @@ int mono_signature_has_param_type_names(MonoMethodSignature *sig, uint32_t param
     return result;
 }
 
+/*
+ * Example:
+ *
+ *     if (mono_signature_has_param_type_names(sig, 2, (const char *[]) { "System.Int32", "System.String" })) { 
+ *         // ...do something with the signature...
+ *     }
+ *
+ * Return 1 if the signature matches, 0 otherwise.
+ */
 int mono_signature_has_return_type_name(MonoMethodSignature *sig, const char *return_type_name) {
     return return_type_name != NULL && strcmp(mono_type_get_name(mono_signature_get_return_type(sig)), return_type_name) == 0; 
 }
@@ -91,11 +99,6 @@ MonoMethod *mono_class_find_ctor_matching_param_type_names(MonoClass *klass, uin
     
     return method;
 }
-
-//MonoMethod *mono_method_desc_search_in_class_matching_param_type_names(MonoMethodDesc *desc, MonoClass *klass, uint32_t param_count, const char **param_type_names) {
-//    MonoMethod *method = NULL;
-//    return method;
-//}
 
 MonoObject *mono_object_init(MonoDomain *domain, MonoClass *klass, uint32_t param_count, const char **param_type_names, void **params, MonoObject **exc) {
     MonoObject *object = NULL;

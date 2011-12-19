@@ -1,9 +1,8 @@
 //
 //  CoreMono.c
-//  CoreMono
+//  CoreMono Framework
 //
-//  Created by Mirek Rusin on 12/12/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Mirek Rusin <mirek@me.com>
 //
 
 #include "CoreMono.h"
@@ -148,7 +147,7 @@ CFDictionaryRef CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFAllocato
     return dictionary;
 }
 
-CFMutableDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject(CFAllocatorRef allocator, MonoObject *monoObject) {
+CFDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     CFMutableDictionaryRef dictionary = NULL;
     if (monoObject) {
         dictionary = CFDictionaryCreateMutable(allocator, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
@@ -170,7 +169,7 @@ CFMutableDictionaryRef CMCreateDictionaryWithPropertiesOfMonoObject(CFAllocatorR
             }
         }
     }
-    return dictionary;
+    return (CFDictionaryRef) dictionary;
 }
 
 CFTypeRef CMNullify(CFTypeRef value) {
@@ -629,115 +628,17 @@ MonoObject *CMMonoDateTimeWithDate(CFDateRef date) {
     return monoObject;
 }
 
-MonoArray *CMMonoArrayWithArray(CFArrayRef array) {
+MonoArray *CMMonoInlineObjectArrayWithArray(CFArrayRef array) {
     MonoArray *monoArray = NULL;
     if (array) {
-        CFIndex count = CFArrayGetCount(array);
-        monoArray = mono_array_new(mono_domain_get(), mono_get_object_class(), count);
-        // TODO: we need to invoke .ctor
-        for (CFIndex i = 0; i < count; i++) {
+        CFIndex n = CFArrayGetCount(array);
+        monoArray = mono_array_new(mono_domain_get(), mono_get_object_class(), n);
+        for (CFIndex i = 0; i < n; i++) {
             mono_array_set(monoArray, MonoObject *, i, CMMonoObjectWithObject(CFArrayGetValueAtIndex(array, i)));
         }
     }
     return monoArray;
 }
-
-//MonoMethod *CMMethodSearchWithClass()
-
-//bool mono_signature_has_param_type_names2(MonoMethodSignature *sig, uint32_t count, ...) {
-//    bool result = 0;
-//    MonoType *p = NULL;
-//    void *iter = NULL;
-//    va_list vp;
-//    
-//    va_start(vp, count);
-//    
-//    if (mono_signature_get_param_count(sig) == count) {
-//        result = 1;
-//        while ((p = mono_signature_get_params(sig, &iter))) {
-//            const char *p2 = va_arg(vp, const char *);
-//            if (strcmp(mono_type_get_name(p), p2) != 0) {
-//                result = 0;
-//                break;
-//            }
-//        }
-//    }
-//
-//    va_end(vp);
-//    
-//    return result;
-//}
-
-//bool CMMonoMethodSignatureMatchesMonoParamTypes(MonoMethodSignature *monoMethodSignature, MonoType **monoTypes, CFIndex n) {
-//    bool result = 0;
-//    if (monoMethodSignature) {
-//        void *paramsIterator = NULL;
-//        MonoType *monoType = NULL;
-//        if (mono_signature_get_param_count(monoMethodSignature) == n) {
-//            
-//        }
-//        
-//        for () {
-//            
-//        }
-//        
-//        MONO_TYPE_U2
-//        
-//        while ((monoType = mono_signature_get_params(monoMethodSignature, &paramsIterator))) {
-//            if (strcmp(mono_type_get_name(monoType), "Int32")) {
-//                monoObject = mono_object_new(mono_domain_get(), monoClass);
-//                
-//                int32_t n_ = (int32_t) n;
-//                void *params[1] = { &n_ };
-//                MonoObject *monoExceptionObject = NULL;
-//                (void) mono_runtime_invoke(monoMethod, monoObject, params, &monoExceptionObject);
-//                if (monoExceptionObject) {
-//                    fprintf(stderr, "ERROR: Exception in constructor, %p\n", monoExceptionObject);
-//                }
-//                
-//                break;
-//            }
-//        }
-//    }
-//    return result;
-//}
-
-//bool CMMonoMethodHasMonoParamTypes(MonoMethod *monoMethod, MonoType **types, CFIndex n) {
-//    bool result = 0;
-//    if (monoMethod) {
-//        
-//    }
-//    return result;
-//}
-
-//MonoObject *CMMonoObjectInit(MonoImage *monoImageOrNull, MonoClass *monoClass, uint32_t MonoType **paramTypes, void **paramValues) {
-//    MonoObject *monoObject = NULL;
-//    MonoImage *monoImage = monoImageOrNull ? monoImageOrNull : mono_get_corlib();
-//    if (monoImage) {
-//        if (monoClass) {
-//            MonoMethod *monoMethod = NULL;
-//            void *iterator = NULL;
-//            while ((monoMethod = mono_class_get_methods(monoClass, &iterator))) {
-//                if (strcmp(mono_method_get_name(monoMethod), ".ctor") == 0) {
-//                    if (mono_signature_has_param_type_names(mono_method_signature(monoMethod), 1, "Int32")) {
-//                        monoObject = mono_object_new(mono_domain_get(), monoClass);
-//                        
-//                        int32_t n_ = (int32_t) n;
-//                        void *params[1] = { &n_ };
-//                        MonoObject *monoExceptionObject = NULL;
-//                        (void) mono_runtime_invoke(monoMethod, monoObject, params, &monoExceptionObject);
-//                        if (monoExceptionObject) {
-//                            fprintf(stderr, "ERROR: Exception in constructor, %p\n", monoExceptionObject);
-//                        }
-//                        
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    return monoObject;
-//}
 
 MonoObject *CMMonoGuidWithUUID(CFUUIDRef uuid) {
     MonoObject *monoObject = NULL;
@@ -752,6 +653,22 @@ MonoObject *CMMonoGuidWithUUID(CFUUIDRef uuid) {
         uint16_t c = (bytes.byte6 << 8) | bytes.byte7;
         monoObject = mono_object_new(mono_domain_get(), monoClass);
         (void) mono_runtime_invoke(monoCtor, monoObject, (void *[11]) { &a, &b, &c, &bytes.byte8, &bytes.byte9, &bytes.byte10, &bytes.byte11, &bytes.byte12, &bytes.byte13, &bytes.byte14, &bytes.byte15 }, NULL);
+    }
+    return monoObject;
+}
+
+MonoObject *CMMonoUriWithURL(CFURLRef url) {
+    MonoObject *monoObject = NULL;
+    
+    static MonoClass *monoClass = NULL; if (monoClass == NULL) monoClass = mono_class_from_name(mono_get_corlib(), "System", "Uri");
+    static MonoMethod *monoCtor = NULL; if (monoCtor == NULL) monoCtor = mono_class_find_ctor_matching_param_type_names(monoClass, 1, (const char *[1]) { "System.String" });
+    
+    if (url) {
+        CFStringRef string = CFURLGetString(url);
+        IF_UTF8(kCFAllocatorDefault, string, utf8, {
+            monoObject = mono_object_new(mono_domain_get(), monoClass);
+            (void) mono_runtime_invoke(monoCtor, monoObject, (void *[1]) { utf8 }, NULL);
+        });
     }
     return monoObject;
 }
@@ -854,36 +771,21 @@ MonoObject *CMMonoHashtableWithDictionary(CFDictionaryRef dictionary) {
 //    return monoObject;
 //}
 
+// Create mono object with Core Foundation object.
+// TODO: CFBagGetTypeID, CFBinaryHeapGetTypeID, CFBitVectorGetTypeID, CFErrorGetTypeID, CFSetRef, CFPropertyListRef, CFSocketGetTypeID, CFTimeZoneGetTypeID, CFTreeGetTypeID, CFXMLNodeGetTypeID
 MonoObject *CMMonoObjectWithObject(CFTypeRef object) {
     MonoObject *monoObject = NULL;
     if (object) {
-             if (CFGetTypeID(object) == CFStringGetTypeID())     monoObject = (MonoObject *) CMMonoStringWithString         ((CFStringRef)     object);
-        else if (CFGetTypeID(object) == CFNumberGetTypeID())     monoObject =                CMMonoObjectWithNumber         ((CFNumberRef)     object);
-        else if (CFGetTypeID(object) == CFArrayGetTypeID())      monoObject = (MonoObject *) CMMonoArrayWithArray           ((CFArrayRef)      object);
-        else if (CFGetTypeID(object) == CFDictionaryGetTypeID()) monoObject =                CMMonoHashtableWithDictionary  ((CFDictionaryRef) object);
-        else if (CFGetTypeID(object) == CFDateGetTypeID())       monoObject =                CMMonoDateTimeWithDate         ((CFDateRef)       object);
-        else if (CFGetTypeID(object) == CFDataGetTypeID())       monoObject = (MonoObject *) CMMonoInlineByteArrayWithData  ((CFDataRef)       object);
-        else if (CFGetTypeID(object) == CFBooleanGetTypeID())    monoObject = (MonoObject *) CMMonoBooleanObjectWithBoolean ((CFBooleanRef)    object);
-        else if (CFGetTypeID(object) == CFNullGetTypeID())       monoObject = (MonoObject *) NULL;
-        else if (CFGetTypeID(object) == CFUUIDGetTypeID())       monoObject = (MonoObject *) CMMonoGuidWithUUID             ((CFUUIDRef)       object);
-        //        CFNullGetTypeID();
-        
-
-        //CFUUIDCreateWithBytes(<#CFAllocatorRef alloc#>, <#UInt8 byte0#>, <#UInt8 byte1#>, <#UInt8 byte2#>, <#UInt8 byte3#>, <#UInt8 byte4#>, <#UInt8 byte5#>, <#UInt8 byte6#>, <#UInt8 byte7#>, <#UInt8 byte8#>, <#UInt8 byte9#>, <#UInt8 byte10#>, <#UInt8 byte11#>, <#UInt8 byte12#>, <#UInt8 byte13#>, <#UInt8 byte14#>, <#UInt8 byte15#>)
-        
-//        else if (CFGetTypeID(object) == CFBagGetTypeID())        monoObject =                CMMonoBagWithBag              ((CFBagRef)        object);
-//        else if (CFGetTypeID(object) == CFBinaryHeapGetTypeID())        monoObject =                CMMonoBagWithBag              ((CFBagRef)        object);
-
-//        CFBitVectorGetTypeID();
-//        CFErrorGetTypeID();
-//        CFMutableSetRef;
-//        CFPropertyListRef
-//        CFSocketGetTypeID();
-//        CFTimeZoneGetTypeID();
-//        CFTreeGetTypeID();
-//        CFURLGetTypeID();
-//        CFUUIDGetTypeID();
-//        CFXMLNodeGetTypeID();
+        if      (CFGetTypeID(object) == CFNullGetTypeID())       monoObject = (MonoObject *) NULL;
+        else if (CFGetTypeID(object) == CFStringGetTypeID())     monoObject = (MonoObject *) CMMonoStringWithString           ((CFStringRef)     object);
+        else if (CFGetTypeID(object) == CFNumberGetTypeID())     monoObject =                CMMonoObjectWithNumber           ((CFNumberRef)     object);
+        else if (CFGetTypeID(object) == CFArrayGetTypeID())      monoObject = (MonoObject *) CMMonoInlineObjectArrayWithArray ((CFArrayRef)      object);
+        else if (CFGetTypeID(object) == CFDictionaryGetTypeID()) monoObject =                CMMonoHashtableWithDictionary    ((CFDictionaryRef) object);
+        else if (CFGetTypeID(object) == CFDateGetTypeID())       monoObject =                CMMonoDateTimeWithDate           ((CFDateRef)       object);
+        else if (CFGetTypeID(object) == CFDataGetTypeID())       monoObject = (MonoObject *) CMMonoInlineByteArrayWithData    ((CFDataRef)       object);
+        else if (CFGetTypeID(object) == CFBooleanGetTypeID())    monoObject = (MonoObject *) CMMonoBooleanObjectWithBoolean   ((CFBooleanRef)    object);
+        else if (CFGetTypeID(object) == CFUUIDGetTypeID())       monoObject = (MonoObject *) CMMonoGuidWithUUID               ((CFUUIDRef)       object);
+        else if (CFGetTypeID(object) == CFURLGetTypeID())        monoObject = (MonoObject *) CMMonoUriWithURL                 ((CFURLRef)        object);
     }
     return monoObject;
 }
