@@ -1,11 +1,14 @@
 //
-//  mono_ext.c
-//  CoreMono Framework
+// CoreMono Framework
 //
-//  Copyright (c) 2011 Mirek Rusin <mirek@me.com>
+// (c) 2011 Mirek Rusin <mirek@me.com>
 //
 
-#include "mono_ext.h"
+#include "CoreMonoHelpers.h"
+
+CFTypeRef CMNullify(CFTypeRef value) {
+    return value ? value : kCFNull;
+}
 
 int mono_signature_has_param_type_names(MonoMethodSignature *sig, uint32_t param_count, const char **param_type_names) {
     int result = 0;
@@ -29,15 +32,6 @@ int mono_signature_has_param_type_names(MonoMethodSignature *sig, uint32_t param
     return result;
 }
 
-/*
- * Example:
- *
- *     if (mono_signature_has_param_type_names(sig, 2, (const char *[]) { "System.Int32", "System.String" })) { 
- *         // ...do something with the signature...
- *     }
- *
- * Return 1 if the signature matches, 0 otherwise.
- */
 int mono_signature_has_return_type_name(MonoMethodSignature *sig, const char *return_type_name) {
     return return_type_name != NULL && strcmp(mono_type_get_name(mono_signature_get_return_type(sig)), return_type_name) == 0; 
 }

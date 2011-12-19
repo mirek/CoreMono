@@ -9,32 +9,6 @@
 #ifndef CoreMono_CMTypes_h
 #define CoreMono_CMTypes_h
 
-#define __CORE_MONO_JOIN(x, y)       __CORE_MONO_JOIN_AGAIN(x, y)
-#define __CORE_MONO_JOIN_AGAIN(x, y) x ## y
-
-#define IF_UTF8(allocator, string, utf8, whatever)                                                                                  \
-    size_t __CORE_MONO_JOIN(__length_of_, utf8) = -1;                                                                               \
-    char *utf8 = NULL; \
-    if (CFStringGetLength(string) == 0) { \
-        __CORE_MONO_JOIN(__length_of_, utf8) = 0; \
-        utf8 = ""; \
-    } else { \
-        if (NULL == (utf8 = (char *) CFStringGetCStringPtr(string, kCFStringEncodingUTF8))) {                                           \
-            __CORE_MONO_JOIN(__length_of_, utf8) = CFStringGetMaximumSizeForEncoding(CFStringGetLength(string), kCFStringEncodingUTF8); \
-            if ((utf8 = CFAllocatorAllocate(allocator, __CORE_MONO_JOIN(__length_of_, utf8) , 0))) {                                    \
-                if (0 == CFStringGetCString(string, utf8, __CORE_MONO_JOIN(__length_of_, utf8), kCFStringEncodingUTF8)) {               \
-                    /* todo */                                                                                                          \
-                }                                                                                                                       \
-            }                                                                                                                           \
-        }                                                                                                                               \
-    } \
-    do { whatever } while (0);                                                                                                      \
-    if (__CORE_MONO_JOIN(__length_of_, utf8) > 0) {                                                                               \
-        if (utf8) {                                                                                                                 \
-            CFAllocatorDeallocate(allocator, utf8);                                                                                 \
-        }                                                                                                                           \
-    }                                                                                                                               \
-
 typedef struct __CMImageStruct {
     CFAllocatorRef allocator;
     CFIndex retainCount;
