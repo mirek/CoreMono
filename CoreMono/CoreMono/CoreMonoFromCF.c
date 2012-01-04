@@ -136,8 +136,11 @@ MonoObject *CMMonoObjectWithNumber(CFNumberRef number) {
 MonoObject *CMMonoDateTimeWithDate(CFDateRef date) {
     MonoObject *monoObject = NULL;
     if (date) {
+        // Absolute time is a double, starting from 00:00:00 1 January 2001
         CFAbsoluteTime absoluteTime = CFDateGetAbsoluteTime(date);
-        int64_t ticks = (int64_t) absoluteTime;
+        CFTimeInterval unixTimestamp = absoluteTime + 978307200.0;
+        // Ticks represent the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight, January 1, 0001.
+        int64_t ticks = ((int64_t) (10000000 * unixTimestamp)) + 621355968000000000LL;
         MonoClass *monoClass = mono_class_from_name(mono_get_corlib(), "System", "DateTime");
         MonoObject *monoExceptionObject = NULL;
         monoObject = mono_object_init(mono_domain_get(), monoClass, 1, (const char *[]) { "System.Int64" }, (void *[]) { &ticks }, &monoExceptionObject);

@@ -74,12 +74,22 @@ CFNumberRef CMCreateNumberWithMonoSingleObject(CFAllocatorRef allocator, MonoObj
 CFDateRef CMCreateDateWithMonoDateTimeObject(CFAllocatorRef allocator, MonoObject *monoObject) {
     CFDateRef date = NULL;
     if (monoObject) {
-        // Ticks represent the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight, January 1, 0001.
-        uint64_t ticks = * (uint64_t *) mono_object_unbox(monoObject);
+        static MonoClass *monoClass = NULL;
+        if (monoClass == NULL)
+            monoClass = mono_class_from_name(mono_get_corlib(), "System", "DateTime");
         
-        // Absolute time is the first instant of the 1 January 2001, GMT
-        // TODO: This is wrong, offset abs time - unix epoch
-        date = CFDateCreate(allocator, ((ticks) - 621355968000000000LL) / 10000000);
+        static MonoMethod *monoTicksMethod = NULL;
+        if (monoTicksMethod == NULL)
+            monoTicksMethod = mono_class_find_get_method_for_property_matching_type_name(monoClass, "Ticks", "System.Int64");
+
+        // Ticks represent the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight, January 1, 0001 (GMT I hope!)
+        int64_t ticks = * (int64_t *) mono_object_unbox(mono_runtime_invoke(monoTicksMethod, mono_object_unbox(monoObject), NULL, NULL));
+
+        // Absolute time starting from 00:00:00 1 January 2001 (second resolution, double type)
+        CFTimeInterval unixTimestamp = (ticks - 621355968000000000LL) / 10000000.0;
+        CFAbsoluteTime absoluteTime = unixTimestamp - 978307200.0;
+
+        date = CFDateCreate(allocator, absoluteTime);
     }
     return date;
 }
@@ -127,9 +137,9 @@ CFDictionaryRef CMCreateDictionaryWithMonoSubclassOfIDictionaryObject(CFAllocato
                         keys[i] = CMNullify(CMCreateObjectWithMonoObject(allocator, mono_array_get(monoKeysArray, MonoObject *, i)));
                         values[i] = CMNullify(CMCreateObjectWithMonoObject(allocator, mono_array_get(monoValuesArray, MonoObject *, i)));
                     }
-                    
+
                     dictionary = CFDictionaryCreate(allocator, keys, values, count, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-                    
+
                     for (int i = 0; i < count; i++) {
                         CFRelease(keys[i]);
                         CFRelease(values[i]);

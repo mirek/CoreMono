@@ -56,7 +56,7 @@ namespace test {
                 { "int", (int) 3 },
                 { "e", null },
                 { "f", "7" },
-                { "g", new DateTime() },
+                { "g", DateTime.Now },
                 { "h", true },
                 { "i", false },
                 { "j", new int[] { 1, 2, 3, 4, 5 } },
@@ -67,7 +67,8 @@ namespace test {
                 { "mix 1", new object[] { 1, "two", 3.3, 4.4f, false, true, null } },
                 { "exception", new Exception("foo") },
                 { "bytes", new byte[] { 0, 1, 2, 3, 4, 5 } },
-                { "ArrayList", new ArrayList() { 1, "2", 3.3, 4.4f, false, null, true } }
+                { "ArrayList", new ArrayList() { 1, "2", 3.3, 4.4f, false, null, true } },
+                { "DateTime", new DateTime(1999, 1, 13, 3, 57, 32, 11) }
             };
         }
         

@@ -13,6 +13,9 @@
 int main (int argc, const char *argv[]) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
+    printf("--- %f\n", [[NSDate dateWithTimeIntervalSince1970: 0] timeIntervalSinceReferenceDate]);
+
+    
     CMDomainRef domain = CMJITCreateDomainByInitializingWithPath(kCFAllocatorDefault, CFSTR("test1.exe"));
     if (domain) {
         CMAssemblyRef assembly = CMDomainCreateAssemblyByOpeningPath(domain, CFSTR("test1.exe"));
@@ -22,28 +25,31 @@ int main (int argc, const char *argv[]) {
             CMClassRef klass = CMClassCreateWithAssembly(assembly, CFSTR("test"), CFSTR("test1"));
             if (klass) {
 
-//                CFTypeRef result = CMImageCreateObjectByInvokingMethodWithName(CMAssemblyGetImage(assembly), CFSTR("test.test1:ReturnInt32WithInt32"), TRUE, &i);
+//                CFTypeRef result = CMImageCreateObjectByInvokingMethodWithName(CMAssemblyGetImage(assembly), CFSTR("test.test1:GetDictionary"), TRUE, &i);
 //                CFShow(result);
+//                CFRelease(result);
 
-                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:PrintWhatever"), TRUE);
+                CMMethodDescRef methodDesc = CMMethodDescCreate(kCFAllocatorDefault, CFSTR("test.test1:GetDictionary"), TRUE);
                 if (methodDesc) {
                     
                     MonoMethod *monoMethod = CMImageGetMonoMethodWithMethodDesc(CMAssemblyGetImage(assembly), methodDesc);
                     if (monoMethod) {
 //                        int32_t i = 2011;
                         
-                        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                    @"foo", @"string",
-                                                    [NSNumber numberWithFloat: 1.123], @"float",
-                                                    [NSNumber numberWithDouble: 4.567], @"double",
-                                                    [NSNumber numberWithInt: 3], @"int",
-                                                    [NSNumber numberWithLong: 34], @"long",
-                                                    [NSNumber numberWithLongLong: 1ll], @"long long",
-                                                    [NSArray arrayWithObjects: @"one", [NSNumber numberWithShort: 2], [NSNumber numberWithFloat: 3.3], kCFBooleanTrue, kCFBooleanFalse, kCFNull, @"last", nil], @"array",
-                                                    [NSData dataWithBytes: (const char[]) { 'a', 'b', 'c' } length: 3], @"data",
-                                                    nil];
+//                        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                                    @"foo", @"string",
+//                                                    [NSNumber numberWithFloat: 1.123], @"float",
+//                                                    [NSNumber numberWithDouble: 4.567], @"double",
+//                                                    [NSNumber numberWithInt: 3], @"int",
+//                                                    [NSNumber numberWithLong: 34], @"long",
+//                                                    [NSNumber numberWithLongLong: 1ll], @"long long",
+//                                                    [NSArray arrayWithObjects: @"one", [NSNumber numberWithShort: 2], [NSNumber numberWithFloat: 3.3], kCFBooleanTrue, kCFBooleanFalse, kCFNull, @"last", nil], @"array",
+//                                                    [NSData dataWithBytes: (const char[]) { 'a', 'b', 'c' } length: 3], @"data",
+//                                                    [NSDate date], @"date",
+//                                                    nil];
 
-                        void *params[1] = { CMMonoObjectWithObject(dictionary) };
+//                        void *params[1] = { CMMonoObjectWithObject(dictionary) };
+                        void *params = NULL;
                         MonoObject *monoObject = mono_runtime_invoke(monoMethod, NULL, params, NULL);
                         CFTypeRef object = CMCreateObjectWithMonoObject(NULL, monoObject);
                         CFShow(object);

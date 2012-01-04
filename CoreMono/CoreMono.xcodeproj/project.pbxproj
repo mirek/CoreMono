@@ -47,6 +47,9 @@
 		EB51DBEB14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
 		EB51DBEC14967A6300929A4A /* CMMethodDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51DBE914967A6300929A4A /* CMMethodDesc.c */; };
 		EB51DBEE14967A7400929A4A /* CMMethodDesc.h in Headers */ = {isa = PBXBuildFile; fileRef = EB51DBED14967A7400929A4A /* CMMethodDesc.h */; };
+		ED03785814B376D400C030F3 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED03785714B376D400C030F3 /* CoreMonoToCF.c */; };
+		ED03785914B376D400C030F3 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED03785714B376D400C030F3 /* CoreMonoToCF.c */; };
+		ED03785A14B376D400C030F3 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED03785714B376D400C030F3 /* CoreMonoToCF.c */; };
 		ED0BD8CA149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
 		ED0BD8CB149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
 		ED0BD8CC149A1044003C1B7F /* CMJIT.c in Sources */ = {isa = PBXBuildFile; fileRef = ED0BD8C9149A1044003C1B7F /* CMJIT.c */; };
@@ -56,9 +59,6 @@
 		ED11C947149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */; };
 		ED11C948149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */; };
 		ED11C949149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */; };
-		ED11C94D149F9D2700557FA8 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */; };
-		ED11C94E149F9D2700557FA8 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */; };
-		ED11C94F149F9D2700557FA8 /* CoreMonoToCF.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */; };
 		ED11C951149F9F1D00557FA8 /* CoreMonoHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = ED11C950149F9F1D00557FA8 /* CoreMonoHelpers.h */; };
 		ED11C953149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */; };
 		ED11C954149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */; };
@@ -136,11 +136,11 @@
 		EB51DBE51496798500929A4A /* CMMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMMethod.c; sourceTree = "<group>"; };
 		EB51DBE914967A6300929A4A /* CMMethodDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMMethodDesc.c; sourceTree = "<group>"; };
 		EB51DBED14967A7400929A4A /* CMMethodDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMethodDesc.h; sourceTree = "<group>"; };
+		ED03785714B376D400C030F3 /* CoreMonoToCF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoToCF.c; sourceTree = "<group>"; };
 		ED0BD8C9149A1044003C1B7F /* CMJIT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CMJIT.c; sourceTree = "<group>"; };
 		ED0BD8CE149A10D1003C1B7F /* CMJIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMJIT.h; sourceTree = "<group>"; };
 		ED11C944149F9CF200557FA8 /* CoreMonoFromCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoFromCF.h; sourceTree = "<group>"; };
 		ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoFromCF.c; sourceTree = "<group>"; };
-		ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoToCF.c; sourceTree = "<group>"; };
 		ED11C950149F9F1D00557FA8 /* CoreMonoHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoHelpers.h; sourceTree = "<group>"; };
 		ED11C952149FA16B00557FA8 /* CoreMonoHelpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMonoHelpers.c; sourceTree = "<group>"; };
 		ED11C956149FA3EB00557FA8 /* CoreMonoToCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMonoToCF.h; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 				ED11C944149F9CF200557FA8 /* CoreMonoFromCF.h */,
 				ED11C946149F9D0100557FA8 /* CoreMonoFromCF.c */,
 				ED11C956149FA3EB00557FA8 /* CoreMonoToCF.h */,
-				ED11C94C149F9D2700557FA8 /* CoreMonoToCF.c */,
+				ED03785714B376D400C030F3 /* CoreMonoToCF.c */,
 				EB51DBC114952A1100929A4A /* CMAssembly.h */,
 				EB51DBB9149504FB00929A4A /* CMAssembly.c */,
 				EB51DBBF1495133C00929A4A /* CMDomain.h */,
@@ -447,8 +447,8 @@
 				EB04884B1499055100FE618E /* CMClass.c in Sources */,
 				ED0BD8CA149A1044003C1B7F /* CMJIT.c in Sources */,
 				ED11C947149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */,
-				ED11C94D149F9D2700557FA8 /* CoreMonoToCF.c in Sources */,
 				ED11C953149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */,
+				ED03785814B376D400C030F3 /* CoreMonoToCF.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,8 +466,8 @@
 				EB04884C1499055100FE618E /* CMClass.c in Sources */,
 				ED0BD8CB149A1044003C1B7F /* CMJIT.c in Sources */,
 				ED11C948149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */,
-				ED11C94E149F9D2700557FA8 /* CoreMonoToCF.c in Sources */,
 				ED11C954149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */,
+				ED03785914B376D400C030F3 /* CoreMonoToCF.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,8 +485,8 @@
 				EB04884D1499055100FE618E /* CMClass.c in Sources */,
 				ED0BD8CC149A1044003C1B7F /* CMJIT.c in Sources */,
 				ED11C949149F9D0100557FA8 /* CoreMonoFromCF.c in Sources */,
-				ED11C94F149F9D2700557FA8 /* CoreMonoToCF.c in Sources */,
 				ED11C955149FA16B00557FA8 /* CoreMonoHelpers.c in Sources */,
+				ED03785A14B376D400C030F3 /* CoreMonoToCF.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
