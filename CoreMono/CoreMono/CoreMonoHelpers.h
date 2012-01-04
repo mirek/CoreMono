@@ -130,6 +130,11 @@ MonoMethod *mono_class_find_method_matching_param_type_names(MonoClass *klass, c
 MonoMethod *mono_class_find_ctor_matching_param_type_names(MonoClass *klass, uint32_t param_count, const char **param_type_names);
 
 /*
+ * Get property's get method matching return type name
+ */
+MonoMethod *mono_class_find_get_method_for_property_matching_type_name(MonoClass *klass, const char *name, const char *type_name);
+
+/*
  * Create object and invoke it's constructor with specified paramer type names and values.
  */
 MonoObject *mono_object_init(MonoDomain *domain, MonoClass *klass, uint32_t param_count, const char **param_names, void **params, MonoObject **exc);

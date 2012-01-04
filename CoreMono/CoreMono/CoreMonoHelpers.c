@@ -16,9 +16,9 @@ int mono_signature_has_param_type_names(MonoMethodSignature *sig, uint32_t param
     void *iter = NULL;
     int i = 0;
     
-    if (param_type_names) {
-        if (mono_signature_get_param_count(sig) == param_count) {
-            result = 1;
+    if (mono_signature_get_param_count(sig) == param_count) {
+        result = 1;
+        if (param_type_names) {
             while (((p = mono_signature_get_params(sig, &iter)))) {
                 if (param_type_names[i] == NULL || strcmp(mono_type_get_name(p), param_type_names[i]) != 0) {
                     result = 0;
@@ -94,13 +94,28 @@ MonoMethod *mono_class_find_ctor_matching_param_type_names(MonoClass *klass, uin
     return method;
 }
 
+MonoMethod *mono_class_find_get_method_for_property_matching_type_name(MonoClass *klass, const char *name, const char *type_name) {
+    MonoMethod *method = NULL, *tmp = NULL;
+    MonoProperty *property = NULL;
+    
+    if ((property = mono_class_get_property_from_name(klass, name))) {
+        if ((tmp = mono_property_get_get_method(property))) {
+            if (mono_signature_has_return_type_name(mono_method_signature(tmp), type_name)) {
+                method = tmp;
+            }
+        }
+    }
+    
+    return method;
+}
+
 MonoObject *mono_object_init(MonoDomain *domain, MonoClass *klass, uint32_t param_count, const char **param_type_names, void **params, MonoObject **exc) {
     MonoObject *object = NULL;
     MonoMethod *method = NULL;
     
     if ((method = mono_class_find_ctor_matching_param_type_names(klass, param_count, param_type_names))) {
         if ((object = mono_object_new(domain, klass))) {
-            mono_runtime_invoke(method, object, params, exc);
+            mono_runtime_invoke(method, mono_type_is_struct(mono_class_get_type(klass)) ? mono_object_unbox(object) : object, params, exc);
         }
     }
     
